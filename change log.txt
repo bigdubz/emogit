@@ -1,0 +1,56 @@
+Version 1.00:	Music, Athan, and reddit scraper bot
+
+Version 1.01:	Fixed athan
+                Added gambling function (added gambling addiction)
+
+Version 1.02:	Added a function to handle all stats changes
+                Added a daily bonus points function
+
+Version 1.03:	Added a fully functional Blackjack game (gambling addiction innovated™)
+                Optimized `edit_stats()` function
+
+Version 1.04:	Fixed Blackjack rules
+                Embedded !queue command message
+
+Version 1.05:	Fixed Blackjack rules
+                Added Blackjack game IDs
+                Minor code optimizations
+
+Version 1.06:	Made Blackjack have player-specific decks to play games from
+                Fixed some Blackjack bugs and made optimizations
+                Minor code optimizations
+
+Version 1.07:	Added a command to toggle athan reminders and to DM users about athan times
+                Minor code optimizations
+                Made Blackjack games file store a max of 3 games per player
+
+Version 1.08:	Added a command to display all current bot commands
+                No longer sends message when leveling up
+                Now grants points equal to `<Level> // 10` when leveling up
+
+Version 1.09:	Started recording words for use in chatbot later
+
+Version 1.10:	Added a random chatbot
+
+Version 1.11:	Added `"<@0123456789>"` to `allowed_characters` (for user mentioning and arabizi)
+                Chatbot now automatically adds good phrases for use
+                Chatbot word dictionaries are now guild specific
+                Added `!bad` and `!del` for quick word dictionaries modifications
+                Lists and dictionaries in `words.json` are now sorted
+                Chatbot word sense optimizations
+
+Version 1.12:	Added Catch Me If You Can! game between two players
+
+Version 1.13:   Catch Me If You Can! now is a playable game
+                Optimized `!clear` function, now bulk deletes when message amount is more than 1
+                Minor bug fixes
+
+Version 1.14:   Migrated to slash and hybrid commands
+
+Version 1.15:   Almost fully migrated to slash commands
+                Interaction not found bug arised (I'm gonna kms)
+
+Version 1.16:   Interaction not found bugs fixed only for the most part
+                Brought back prefix commands for some commands like `!roll`
+
+Version 1.17:   Minor bug fixes
