@@ -4,7 +4,7 @@ import yt_dlp
 import discord
 from discord import app_commands
 from yt_dlp_py import YTDLSource
-from cogs import scrapers, edit_stats as eus
+from cogs import scrapers, edit_stats as stats
 from discord.ext import commands
 
 song_queue = []
@@ -14,11 +14,14 @@ song_data = {}
 class MusicBot(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+        self.in_queue = False
 
     @commands.Cog.listener()
     async def on_song_end(self, ctx: commands.Context):
         while True:
+            self.in_queue = True
             if len(song_queue) == 0:
+                self.in_queue = False
                 return
 
             try:
@@ -26,9 +29,11 @@ class MusicBot(commands.Cog):
                 if not voice.is_playing() and not voice.is_paused():
                     await self.play(ctx, song_queue[0][0], explicit_call=False)
                     song_queue.pop(0)
+                    self.in_queue = False
                     return
 
             except (discord.errors.ClientException, yt_dlp.utils.DownloadError, AttributeError, KeyError):
+                self.in_queue = False
                 return
 
             await asyncio.sleep(5)
@@ -79,31 +84,29 @@ class MusicBot(commands.Cog):
         voice_client = ctx.guild.voice_client
         url = scrapers.yt(search)
         if url not in song_data:
+            await ctx.send("downloaded")
             filename, length = await YTDLSource.from_url(url, loop=self.bot.loop)
-            if length > 10:
-                length = 10
-
+            length = 10 if length > 10 else length
             song_data[url] = (filename, length)
 
         if voice_client and voice_client.is_playing():
             song_queue.append(scrapers.yt(search, True))
             title = song_queue[-1][1]
-            await self.bot.loop.create_task(self.on_song_end(ctx))
-            await ctx.channel.send(f"<@{ctx.author.id}> added \"{title}\" to current song queue")
-            if explicit_call:
-                eus.add_points(ctx, song_data[url][1])
+            if not self.in_queue:
+                await self.bot.loop.create_task(self.on_song_end(ctx))
 
-        else:
-            server = ctx.guild
-            voice_channel = server.voice_client
-            voice_channel.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=song_data[url][0]))
-            await ctx.send(
-                "now playing \"{}\"".format(' '.join(song_data[url][0][:-19].split('_')))
-            )
+            await ctx.send(f"<@{ctx.author.id}> added \"{title}\" to current song queue")
             if explicit_call:
-                eus.add_points(ctx, song_data[url][1])
+                stats.add_points(ctx, song_data[url][1])
 
-            song_data.pop(url)
+            return
+
+        await ctx.send("now playing \"%s\"" % ' '.join(song_data[url][0][:-19].split('_')))
+        ctx.guild.voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=song_data[url][0]))
+        if explicit_call:
+            stats.add_points(ctx, song_data[url][1])
+
+        song_data.pop(url)
 
     @commands.hybrid_command(name='stop', description='Stops music and clears queue')
     async def stop(self, ctx: commands.Context):
@@ -111,7 +114,7 @@ class MusicBot(commands.Cog):
         if voice_client and voice_client.is_playing():
             voice_client.stop()
             song_queue.clear()
-            await ctx.message.channel.send("stopped music and cleared queue", delete_after=5)
+            await ctx.send("stopped music and cleared queue", delete_after=5)
             await asyncio.sleep(1)
             utils.delete_music(song_data)
 
@@ -126,8 +129,8 @@ class MusicBot(commands.Cog):
     async def pause(self, action: discord.Interaction):
         voice_client = action.guild.voice_client
         if voice_client and voice_client.is_playing():
-            voice_client.pause()
             await action.response.send_message("paused", delete_after=5)
+            voice_client.pause()
 
         elif voice_client and voice_client.is_paused():
             return
@@ -142,8 +145,8 @@ class MusicBot(commands.Cog):
     async def unpause(self, action: discord.Interaction):
         voice_client = action.guild.voice_client
         if voice_client and voice_client.is_paused():
-            voice_client.resume()
             await action.response.send_message("unpaused", delete_after=5)
+            voice_client.resume()
 
         elif voice_client and not voice_client.is_playing():
             await action.response.send_message("im not playing anything dumbass", delete_after=5)
@@ -181,20 +184,20 @@ class MusicBot(commands.Cog):
         if len(song_queue) < 1:
             embed = discord.Embed(title="queue is empty", description="", color=0x00ffff)
             await action.response.send_message(embed=embed, delete_after=5)
+            return
 
-        else:
-            embed = discord.Embed(title="current song queue:", description="", color=0x00ffff)
-            titles = [f"<@{action.user.id}> current song queue:"]
-            for num, song in enumerate(song_queue):
-                titles.append(f"{num + 1}- {song[1]}")
-                embed.add_field(name=f"{num + 1}- {song[1]}", value="", inline=False)
+        embed = discord.Embed(title="current song queue:", description="", color=0x00ffff)
+        titles = [f"<@{action.user.id}> current song queue:"]
+        for num, song in enumerate(song_queue):
+            titles.append(f"{num + 1}- {song[1]}")
+            embed.add_field(name=f"{num + 1}- {song[1]}", value="", inline=False)
 
-            await action.response.send_message(embed=embed)
+        await action.response.send_message(embed=embed)
 
     @app_commands.command(name='clearq', description='Clears the current queue')
     async def clearq(self, ctx: discord.Interaction):
-        song_queue.clear()
         await ctx.response.send_message("queue cleared", delete_after=5)
+        song_queue.clear()
 
     @app_commands.command(name='remove', description='Removes a song from the current queue')
     async def remove(self, action: discord.Interaction, num: int):
@@ -230,7 +233,7 @@ class MusicBot(commands.Cog):
             await ctx.send(f"skipping to {song[1]}...")
 
             await self.play(ctx, song[0], explicit_call=False)
-            if len(song_queue) > 0:
+            if len(song_queue) > 0 and not self.in_queue:
                 await self.bot.loop.create_task(self.on_song_end(ctx))
 
         except discord.ClientException:
