@@ -3827,6 +3827,7 @@
                     "50"
                 ],
                 "good": [
+                    "min",
                     "to"
                 ]
             },
@@ -4353,6 +4354,7 @@
                     "fix",
                     "hi",
                     "nice",
+                    "no",
                     "please",
                     "vc",
                     "wtf"
@@ -5346,6 +5348,7 @@
                     "<@331993325915865098>",
                     "<@455124133282578437>",
                     "another",
+                    "hi",
                     "i",
                     "im",
                     "you"
@@ -9971,6 +9974,12 @@
                     "and"
                 ]
             },
+            "ahegao": {
+                "bad": [
+                    "ahegao"
+                ],
+                "good": []
+            },
             "ahhhh": {
                 "bad": [
                     "ahhhh"
@@ -10026,6 +10035,14 @@
                     "new",
                     "nsfw",
                     "reading"
+                ]
+            },
+            "air": {
+                "bad": [
+                    "air"
+                ],
+                "good": [
+                    "fryer"
                 ]
             },
             "aite": {
@@ -10153,6 +10170,7 @@
                     "done",
                     "forgor",
                     "naked",
+                    "over",
                     "there"
                 ]
             },
@@ -10414,6 +10432,7 @@
                     "choked",
                     "come",
                     "continued",
+                    "creativity",
                     "deals",
                     "defensive",
                     "deflecting",
@@ -10457,6 +10476,7 @@
                     "its",
                     "just",
                     "keyboard",
+                    "kick",
                     "killed",
                     "kuro",
                     "leave",
@@ -10550,6 +10570,7 @@
                     "announcement"
                 ],
                 "good": [
+                    "for",
                     "kick"
                 ]
             },
@@ -10602,6 +10623,14 @@
                 "good": [
                     "is",
                     "smh"
+                ]
+            },
+            "anti": {
+                "bad": [
+                    "anti"
+                ],
+                "good": [
+                    "healthy"
                 ]
             },
             "antilazy": {
@@ -10666,7 +10695,8 @@
                 ],
                 "good": [
                     "<pepehmmmthumbsup860512759115415572>",
-                    "I"
+                    "I",
+                    "chat"
                 ]
             },
             "anyyywaysss": {
@@ -10689,6 +10719,7 @@
                     "and",
                     "is",
                     "should",
+                    "unga",
                     "wymmm",
                     "youre"
                 ]
@@ -10914,6 +10945,12 @@
                     "art",
                     "text"
                 ]
+            },
+            "asf": {
+                "bad": [
+                    "asf"
+                ],
+                "good": []
             },
             "ashes": {
                 "bad": [
@@ -12684,6 +12721,7 @@
                     "btw"
                 ],
                 "good": [
+                    "<@331993325915865098>",
                     "the"
                 ]
             },
@@ -12778,6 +12816,14 @@
                     "him"
                 ]
             },
+            "bunga": {
+                "bad": [
+                    "bunga"
+                ],
+                "good": [
+                    "desire"
+                ]
+            },
             "bunker": {
                 "bad": [
                     "bunker"
@@ -12870,6 +12916,7 @@
                     "otherwise",
                     "people",
                     "really",
+                    "saved",
                     "she",
                     "speed",
                     "thats",
@@ -14495,6 +14542,12 @@
                     "new"
                 ]
             },
+            "creativity": {
+                "bad": [
+                    "creativity"
+                ],
+                "good": []
+            },
             "creature": {
                 "bad": [
                     "creature"
@@ -14811,6 +14864,12 @@
                     "files"
                 ]
             },
+            "dauly": {
+                "bad": [
+                    "dauly"
+                ],
+                "good": []
+            },
             "dawg": {
                 "bad": [
                     "dawg"
@@ -14825,8 +14884,11 @@
                     "and",
                     "another",
                     "as",
+                    "day",
                     "i",
+                    "is",
                     "its",
+                    "late",
                     "now",
                     "of",
                     "tho"
@@ -15199,6 +15261,14 @@
                 ],
                 "good": [
                     "it"
+                ]
+            },
+            "desire": {
+                "bad": [
+                    "desire"
+                ],
+                "good": [
+                    "to"
                 ]
             },
             "despair": {
@@ -16104,7 +16174,8 @@
                     "earth"
                 ],
                 "good": [
-                    "got"
+                    "got",
+                    "is"
                 ]
             },
             "easier": {
@@ -16395,6 +16466,14 @@
                 ],
                 "good": [
                     "or"
+                ]
+            },
+            "energy": {
+                "bad": [
+                    "energy"
+                ],
+                "good": [
+                    "type"
                 ]
             },
             "enforce": {
@@ -16714,6 +16793,7 @@
                     "comes",
                     "everyone",
                     "is",
+                    "just",
                     "stares",
                     "today",
                     "would"
@@ -17060,6 +17140,7 @@
                 ],
                 "good": [
                     "guy",
+                    "is",
                     "stuff",
                     "there"
                 ]
@@ -17520,8 +17601,10 @@
                     "2",
                     "almost",
                     "attempt",
+                    "day",
                     "ever",
                     "game",
+                    "in",
                     "main",
                     "not",
                     "one",
@@ -17718,6 +17801,12 @@
                     "by"
                 ]
             },
+            "food": {
+                "bad": [
+                    "food"
+                ],
+                "good": []
+            },
             "footage": {
                 "bad": [
                     "footage"
@@ -17765,6 +17854,7 @@
                     "pixel",
                     "plants",
                     "pussy",
+                    "ramadan",
                     "screentime",
                     "servers",
                     "sharing",
@@ -18060,6 +18150,12 @@
                 "good": [
                     "glitches"
                 ]
+            },
+            "fryer": {
+                "bad": [
+                    "fryer"
+                ],
+                "good": []
             },
             "fuck": {
                 "bad": [
@@ -18765,6 +18861,7 @@
                 ],
                 "good": [
                     "about",
+                    "ahegao",
                     "ass",
                     "dealer",
                     "ending",
@@ -19217,6 +19314,14 @@
                     "hope"
                 ]
             },
+            "guyz": {
+                "bad": [
+                    "guyz"
+                ],
+                "good": [
+                    "first"
+                ]
+            },
             "gym": {
                 "bad": [
                     "gym"
@@ -19471,6 +19576,7 @@
                     "discord",
                     "hd",
                     "it",
+                    "my",
                     "someone",
                     "that",
                     "the",
@@ -19689,6 +19795,14 @@
                     "back"
                 ]
             },
+            "healthy": {
+                "bad": [
+                    "healthy"
+                ],
+                "good": [
+                    "food"
+                ]
+            },
             "hear": {
                 "bad": [
                     "hear"
@@ -19753,6 +19867,14 @@
                     "sell",
                     "yea",
                     "yeah"
+                ]
+            },
+            "hello": {
+                "bad": [
+                    "hello"
+                ],
+                "good": [
+                    "there"
                 ]
             },
             "hellooo": {
@@ -20015,6 +20137,7 @@
                     "his",
                     "ign",
                     "lips",
+                    "mic",
                     "name",
                     "own",
                     "parade",
@@ -22034,12 +22157,14 @@
                     "developing",
                     "div",
                     "dms",
+                    "earth",
                     "elden",
                     "first",
                     "general",
                     "github",
                     "here",
                     "his",
+                    "i",
                     "in",
                     "indescribable",
                     "is",
@@ -22414,7 +22539,9 @@
                     "addicted",
                     "after",
                     "all",
+                    "almost",
                     "another",
+                    "anti",
                     "as",
                     "assembling",
                     "awful",
@@ -22497,6 +22624,7 @@
                     "some",
                     "something",
                     "somewhat",
+                    "soryr",
                     "staring",
                     "still",
                     "stronger",
@@ -23029,6 +23157,15 @@
                     "aside"
                 ]
             },
+            "jordan": {
+                "bad": [
+                    "jordan"
+                ],
+                "good": [
+                    "is",
+                    "jordan"
+                ]
+            },
             "jordanian": {
                 "bad": [
                     "jordanian"
@@ -23140,6 +23277,7 @@
                     "waiting",
                     "wake",
                     "walk",
+                    "wanna",
                     "want",
                     "watched",
                     "without",
@@ -23284,6 +23422,7 @@
                 "good": [
                     "hi",
                     "me",
+                    "nabhan",
                     "you"
                 ]
             },
@@ -23485,6 +23624,8 @@
                     "how",
                     "if",
                     "it",
+                    "jordan",
+                    "know",
                     "man",
                     "maybe",
                     "much",
@@ -23726,7 +23867,8 @@
                     "late"
                 ],
                 "good": [
-                    "game"
+                    "game",
+                    "idk"
                 ]
             },
             "later": {
@@ -24538,6 +24680,14 @@
                     "the"
                 ]
             },
+            "loves": {
+                "bad": [
+                    "loves"
+                ],
+                "good": [
+                    "healthy"
+                ]
+            },
             "low": {
                 "bad": [
                     "low"
@@ -25000,6 +25150,12 @@
                     "you"
                 ]
             },
+            "mb": {
+                "bad": [
+                    "mb"
+                ],
+                "good": []
+            },
             "me": {
                 "bad": [
                     "me"
@@ -25014,6 +25170,7 @@
                     "an",
                     "anal",
                     "and",
+                    "asf",
                     "break",
                     "crazy",
                     "delulu",
@@ -25481,7 +25638,9 @@
                 "bad": [
                     "min"
                 ],
-                "good": []
+                "good": [
+                    "ago"
+                ]
             },
             "mind": {
                 "bad": [
@@ -25703,6 +25862,7 @@
                     "has",
                     "hated",
                     "is",
+                    "loves",
                     "off",
                     "thinks",
                     "with"
@@ -25964,6 +26124,14 @@
                 ],
                 "good": []
             },
+            "mubarak": {
+                "bad": [
+                    "mubarak"
+                ],
+                "good": [
+                    "tomorrow"
+                ]
+            },
             "much": {
                 "bad": [
                     "much"
@@ -26046,6 +26214,14 @@
                     "remain"
                 ]
             },
+            "mute": {
+                "bad": [
+                    "mute"
+                ],
+                "good": [
+                    "his"
+                ]
+            },
             "mutual": {
                 "bad": [
                     "mutual"
@@ -26094,6 +26270,7 @@
                     "entire",
                     "eyes",
                     "face",
+                    "family",
                     "first",
                     "friend",
                     "friends",
@@ -26107,6 +26284,7 @@
                     "in",
                     "insanity",
                     "least",
+                    "life",
                     "little",
                     "looks",
                     "lucky",
@@ -26182,6 +26360,12 @@
             "naaaah": {
                 "bad": [
                     "naaaah"
+                ],
+                "good": []
+            },
+            "nabhan": {
+                "bad": [
+                    "nabhan"
                 ],
                 "good": []
             },
@@ -26312,6 +26496,7 @@
                     "it",
                     "leg",
                     "need",
+                    "one",
                     "some",
                     "sugar",
                     "testosterone",
@@ -26499,6 +26684,7 @@
                     "car",
                     "done",
                     "idea",
+                    "name",
                     "pfp",
                     "score",
                     "wallah"
@@ -26719,6 +26905,7 @@
                     "I",
                     "a",
                     "am",
+                    "announcement",
                     "balls",
                     "before",
                     "bffr",
@@ -27020,6 +27207,7 @@
                     "just",
                     "shoot",
                     "so",
+                    "thats",
                     "to"
                 ]
             },
@@ -27159,6 +27347,7 @@
                     "them",
                     "third",
                     "this",
+                    "those",
                     "times",
                     "tos",
                     "us",
@@ -27711,6 +27900,7 @@
                     "go",
                     "if",
                     "ignore",
+                    "mute",
                     "needed",
                     "no",
                     "not",
@@ -27746,6 +27936,14 @@
                 ],
                 "good": [
                     "hollow"
+                ]
+            },
+            "originality": {
+                "bad": [
+                    "originality"
+                ],
+                "good": [
+                    "and"
                 ]
             },
             "os": {
@@ -28032,6 +28230,7 @@
                     "daily",
                     "dailyt",
                     "daly",
+                    "dauly",
                     "dly",
                     "eat",
                     "fight",
@@ -28994,6 +29193,14 @@
                     "and"
                 ]
             },
+            "potential": {
+                "bad": [
+                    "potential"
+                ],
+                "good": [
+                    "energy"
+                ]
+            },
             "pothos": {
                 "bad": [
                     "pothos"
@@ -29686,6 +29893,14 @@
                     "on"
                 ]
             },
+            "ramadan": {
+                "bad": [
+                    "ramadan"
+                ],
+                "good": [
+                    "mubarak"
+                ]
+            },
             "random": {
                 "bad": [
                     "random"
@@ -29741,6 +29956,7 @@
                     "reach"
                 ],
                 "good": [
+                    "that",
                     "the",
                     "youll"
                 ]
@@ -30765,7 +30981,8 @@
                     "saved"
                 ],
                 "good": [
-                    "pics"
+                    "pics",
+                    "too"
                 ]
             },
             "saves": {
@@ -30812,6 +31029,7 @@
                     "its",
                     "less",
                     "meow",
+                    "ramadan",
                     "something",
                     "that",
                     "the",
@@ -32267,6 +32485,7 @@
                     "boring",
                     "calling",
                     "close",
+                    "cool",
                     "cute",
                     "delulu",
                     "dont",
@@ -32563,7 +32782,9 @@
                 "bad": [
                     "soryr"
                 ],
-                "good": []
+                "good": [
+                    "lmao"
+                ]
             },
             "sotarks": {
                 "bad": [
@@ -33682,6 +33903,7 @@
                     "tbh"
                 ],
                 "good": [
+                    "and",
                     "for",
                     "i",
                     "so"
@@ -34042,6 +34264,7 @@
                     "its",
                     "kind",
                     "last",
+                    "level",
                     "looks",
                     "mean",
                     "more",
@@ -34314,6 +34537,7 @@
                     "opposite",
                     "option",
                     "orange",
+                    "originality",
                     "osu",
                     "other",
                     "outdoor",
@@ -35045,6 +35269,7 @@
                     "detect",
                     "die",
                     "do",
+                    "dominate",
                     "dua",
                     "eachother",
                     "faisal",
@@ -35192,6 +35417,7 @@
                 ],
                 "good": [
                     "idk",
+                    "the",
                     "with",
                     "you"
                 ]
@@ -35243,7 +35469,8 @@
                     "nigga",
                     "rn",
                     "salty",
-                    "so"
+                    "so",
+                    "tbh"
                 ]
             },
             "took": {
@@ -35648,6 +35875,7 @@
                 ],
                 "good": [
                     "of",
+                    "shit",
                     "solution"
                 ]
             },
@@ -35916,6 +36144,14 @@
                     "unfunnily"
                 ],
                 "good": []
+            },
+            "unga": {
+                "bad": [
+                    "unga"
+                ],
+                "good": [
+                    "bunga"
+                ]
             },
             "uni": {
                 "bad": [
@@ -36607,6 +36843,7 @@
                     "fight",
                     "get",
                     "play",
+                    "say",
                     "see",
                     "spend",
                     "try",
@@ -36854,6 +37091,7 @@
                     "be",
                     "can",
                     "changing",
+                    "did",
                     "didnt",
                     "dont",
                     "end",
@@ -36868,6 +37106,7 @@
                     "moved",
                     "need",
                     "never",
+                    "reach",
                     "should",
                     "we",
                     "were",
@@ -37061,6 +37300,7 @@
                     "i",
                     "if",
                     "im",
+                    "in",
                     "is",
                     "it",
                     "kind",
@@ -37284,6 +37524,7 @@
                     "why"
                 ],
                 "good": [
+                    "anyways",
                     "are",
                     "dark",
                     "did",
@@ -37704,6 +37945,7 @@
                     "put",
                     "study",
                     "suck",
+                    "too",
                     "you"
                 ]
             },
@@ -37941,6 +38183,7 @@
                     "code",
                     "dont",
                     "forgor",
+                    "he",
                     "i",
                     "ig",
                     "it",
@@ -38016,6 +38259,7 @@
                     "<lmao713184555627970603>",
                     "and",
                     "babe",
+                    "but",
                     "for",
                     "he",
                     "i",
@@ -39382,6 +39626,7 @@
             "ah",
             "aha",
             "ahead",
+            "ahegao",
             "ahhhh",
             "ahill",
             "ahmad",
@@ -39389,6 +39634,7 @@
             "aid",
             "aim",
             "aint",
+            "air",
             "aite",
             "ajareb",
             "aka",
@@ -39441,6 +39687,7 @@
             "ano",
             "another",
             "answer",
+            "anti",
             "antilazy",
             "any",
             "anymore",
@@ -39474,6 +39721,7 @@
             "as",
             "asap",
             "ascii",
+            "asf",
             "ashes",
             "ashina",
             "ashinas",
@@ -39691,6 +39939,7 @@
             "bullshit",
             "bully",
             "bullying",
+            "bunga",
             "bunker",
             "burn",
             "burned",
@@ -39886,6 +40135,7 @@
             "crazy",
             "create",
             "creative",
+            "creativity",
             "creature",
             "creatures",
             "credit",
@@ -39925,6 +40175,7 @@
             "dark",
             "dash",
             "data",
+            "dauly",
             "dawg",
             "day",
             "dayman",
@@ -39973,6 +40224,7 @@
             "description",
             "deserved",
             "deserves",
+            "desire",
             "despair",
             "desperate",
             "despite",
@@ -40109,6 +40361,7 @@
             "endgame",
             "ending",
             "enemies",
+            "energy",
             "enforce",
             "engine",
             "english",
@@ -40265,6 +40518,7 @@
             "folder",
             "follow",
             "followed",
+            "food",
             "footage",
             "for",
             "forbidden",
@@ -40297,6 +40551,7 @@
             "froze",
             "fruit",
             "frustrating",
+            "fryer",
             "fuck",
             "fucked",
             "fuckign",
@@ -40418,6 +40673,7 @@
             "guys",
             "guyss",
             "guyy",
+            "guyz",
             "gym",
             "gyuobu",
             "ha",
@@ -40461,6 +40717,7 @@
             "heal",
             "healing",
             "health",
+            "healthy",
             "hear",
             "heard",
             "hearing",
@@ -40469,6 +40726,7 @@
             "heheh",
             "heisenburger",
             "hell",
+            "hello",
             "hellooo",
             "help",
             "helpachievement",
@@ -40828,6 +41086,7 @@
             "joined",
             "joke",
             "jokes",
+            "jordan",
             "jordanian",
             "jr",
             "jump",
@@ -40988,6 +41247,7 @@
             "louai",
             "love",
             "loved",
+            "loves",
             "low",
             "lowkey",
             "luck",
@@ -41042,6 +41302,7 @@
             "maya",
             "mayaa",
             "maybe",
+            "mb",
             "me",
             "mean",
             "meaningless",
@@ -41152,6 +41413,7 @@
             "movie",
             "mplay",
             "mskip",
+            "mubarak",
             "much",
             "muldimedia",
             "multi",
@@ -41160,6 +41422,7 @@
             "muscles",
             "muse",
             "must",
+            "mute",
             "mutual",
             "mwah",
             "mwahmwahmwah",
@@ -41169,6 +41432,7 @@
             "na",
             "naaaaa",
             "naaaah",
+            "nabhan",
             "nah",
             "naked",
             "name",
@@ -41322,6 +41586,7 @@
             "or",
             "orange",
             "ori",
+            "originality",
             "os",
             "oskot",
             "ostathe",
@@ -41465,6 +41730,7 @@
             "possibly",
             "posture",
             "pot",
+            "potential",
             "pothos",
             "pov",
             "power",
@@ -41555,6 +41821,7 @@
             "raghad",
             "rain",
             "raining",
+            "ramadan",
             "random",
             "rank",
             "ranks",
@@ -42212,6 +42479,7 @@
             "unfortunately",
             "unfun",
             "unfunnily",
+            "unga",
             "uni",
             "universalis",
             "unix",
@@ -55907,6 +56175,12 @@
                 ],
                 "good": []
             },
+            "VC": {
+                "bad": [
+                    "VC"
+                ],
+                "good": []
+            },
             "WAY": {
                 "bad": [
                     "WAY"
@@ -56511,6 +56785,12 @@
             "httpsroproiojoinge6uob": {
                 "bad": [
                     "httpsroproiojoinge6uob"
+                ],
+                "good": []
+            },
+            "httpstenorcomviewbottleofwatersaullgif26356875": {
+                "bad": [
+                    "httpstenorcomviewbottleofwatersaullgif26356875"
                 ],
                 "good": []
             },
@@ -57524,6 +57804,7 @@
             "NO",
             "PRAY",
             "SAMER",
+            "VC",
             "WAY",
             "a",
             "a5to",
@@ -57605,6 +57886,7 @@
             "httpsopenspotifycomplaylist2ydjik9sk95cdmlh0fkaixsillwkvue8q3wjps4vsf87pw",
             "httpsopenspotifycomtrack7svpakwc6xasxlbz7v7jissi14c3329aa47348fa",
             "httpsroproiojoinge6uob",
+            "httpstenorcomviewbottleofwatersaullgif26356875",
             "httpstenorcomviewd180d0bed0bcd181d0bcd0b5d180d182d18cd181d0bbd0bed0b2d0bed180d0bed0bcd181d0bbd0bed0b2d0bed181d0bcd0b5d180d182d18cd0bbd0b8d0b2d181d0b8gif26608522",
             "httpstenorcomviewhecantdinkithecantdrinkitthirstycatkittengif25233740",
             "httpstenorcomviewidkgif24301301",
