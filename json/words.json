@@ -29145,6 +29145,12 @@
                 ],
                 "good": []
             },
+            "noob": {
+                "bad": [
+                    "noob"
+                ],
+                "good": []
+            },
             "nooo": {
                 "bad": [
                     "nooo"
@@ -44878,6 +44884,7 @@
             "none",
             "nonetheless",
             "noo",
+            "noob",
             "nooo",
             "noooo",
             "nooooo",

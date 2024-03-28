@@ -8,7 +8,7 @@ from discord.ext import commands
 
 import json
 import utils
-from cogs import chatbot, scrapers, edit_stats as eus
+from cogs import chatbot, scrapers, reminders, edit_stats as eus
 
 TOKEN = "MTEzNjQ2NzYzNDM1NTk2NjAxNQ.GT_knh.-RTm2dklcqHMM8vDjwwoGEbphvEeQjClShBBpE"
 intents = discord.Intents.all()
@@ -31,44 +31,9 @@ async def on_ready():
 
     # This should always be executed last
     await daily_toggleable()
+    await reminders.start_reminders()
 
 
-@bot.event
-async def daily_toggleable():
-    weather_time = "07:00 AM"
-    channel_id = 1170131569747439747
-    prayer, prayer_time = scrapers.get_athan_time()
-    prayer_time_obj = datetime.datetime.strptime(prayer_time, "%I:%M %p").time()
-    await bot.get_channel(channel_id).send(f"upcoming {prayer} athan at {prayer_time}")
-    while (datetime.datetime.now().time().strftime("%H:%M") != prayer_time_obj.strftime("%H:%M")
-           and datetime.datetime.now().time().strftime("%H:%M %p") != weather_time):
-        await asyncio.sleep(45)
-
-    with open("json/stats.json", "r") as file:
-        user_data = json.load(file)
-
-    if datetime.datetime.now().time().strftime("%H:%M") == prayer_time_obj.strftime("%H:%M"):
-        for user in user_data:
-            if user_data[user]["athan reminder"]:
-                gigachad = await bot.fetch_user(user)
-                await gigachad.send(
-                    f"Ramadan Kareem!!\n"
-                    f"{'gigachad' if user != '697855051779014796' else 'gigashort'},"  # if user isnt jana
-                    f" {prayer} athan now at {prayer_time}"
-                )
-
-    forecast = scrapers.weather_stats_today()
-    if datetime.datetime.now().time().strftime("%H:%M %p") == weather_time:
-        for user in user_data:
-            if user_data[user]["weather updates"]:
-                gigachad = await bot.fetch_user(user)
-                await gigachad.send(
-                    f"{'gigachad' if user != '697855051779014796' else 'gigashort'},"
-                    f" here's today's weather forecast:\n\n{forecast}")
-
-    await bot.get_channel(channel_id).send(f"{prayer} athan now at {prayer_time}")
-    await asyncio.sleep(180)
-    await daily_toggleable()
 
 
 @bot.event
@@ -152,7 +117,7 @@ async def chatter(msg: discord.Message):
 
     ctx = await bot.get_context(msg)
     if random.randint(0, 12) == 0:
-        chat_bot = bot.get_cog('Chatbot')
+        chat_bot: Chatbot = bot.get_cog('Chatbot')
         await chat_bot.talk(ctx, msg.content)
 
 
