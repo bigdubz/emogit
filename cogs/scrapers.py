@@ -1,12 +1,12 @@
 import datetime
-import requests
 import json
+from random import choice
+
+import requests
+from bs4 import BeautifulSoup as bs
+from discord.ext import commands
 
 from cogs import edit_stats as eus
-from bs4 import BeautifulSoup as bs
-from random import choice
-from discord import app_commands
-from discord.ext import commands
 
 
 class Scrapers(commands.Cog):
@@ -64,7 +64,7 @@ def yt(search: str, get_title: bool = False):
             break
 
     for x in (raw_json['contents']['twoColumnSearchResultsRenderer']['primaryContents']['sectionListRenderer']
-              ['contents'][0]['itemSectionRenderer']['contents']):
+    ['contents'][0]['itemSectionRenderer']['contents']):
 
         # noinspection PyBroadException
         try:

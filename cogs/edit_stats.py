@@ -1,9 +1,9 @@
-import json
 import datetime
-import main
+import json
+from random import randint
+
 import discord
 from discord import app_commands
-from random import randint
 from discord.ext import commands
 
 
@@ -16,7 +16,8 @@ def edit_stats(ctx: commands.Context,
                _msg_total: int = None,
                _bonus: str = None,
                _athan: bool = None,
-               _weather: bool = None):
+               _weather: bool = None,
+               _reminders: dict = None):
     with open("json/stats.json", "r") as file:
         user_data = json.load(file)
 
@@ -29,7 +30,8 @@ def edit_stats(ctx: commands.Context,
             "total messages": _msg_total if _msg_total is not None else 0,
             "bonus claimed at": _bonus if _bonus is not None else f"{datetime.datetime(2000, 1, 1, 0, 0, 0, 1)}",
             "athan reminder": _athan if _athan is not None else False,
-            "weather updates": _weather if _weather is not None else False
+            "weather updates": _weather if _weather is not None else False,
+            "reminders": _reminders if _reminders is not None else {}
         }
 
         with open("json/stats.json", "w") as file:
@@ -45,7 +47,8 @@ def edit_stats(ctx: commands.Context,
         "total messages": _msg_total if _msg_total is not None else user_data[user_id]["total messages"],
         "bonus claimed at": _bonus if _bonus is not None else user_data[user_id]["bonus claimed at"],
         "athan reminder": _athan if _athan is not None else user_data[user_id]["athan reminder"],
-        "weather updates": _weather if _weather is not None else user_data[user_id]["weather updates"]
+        "weather updates": _weather if _weather is not None else user_data[user_id]["weather updates"],
+        "reminders": _reminders if _reminders is not None else user_data[user_id]["reminders"]
     }
 
     with open("json/stats.json", "w") as file:
@@ -275,7 +278,7 @@ class UserStats(commands.Cog):
         await action.response.send_message(f"<@{user_id}> you are currently level {user_data[user_id]['level']}")
 
     @commands.command(name='add_field')
-    async def add_field(self, ctx: commands.Context, field_name, field_value):
+    async def add_field(self, ctx: commands.Context, field_name: str):
         if not await self.bot.is_owner(ctx.message.author):
             await ctx.send("unauthorized")
             return
@@ -284,7 +287,7 @@ class UserStats(commands.Cog):
             user_data = json.load(file)
 
         for user in user_data:
-            user_data[user][field_name] = bool(int(field_value))  # edit type for every new field (not that often)
+            user_data[user][field_name] = {}  # edit type for every new field
 
         with open("json/stats.json", "w") as file:
             json.dump(user_data, file, indent=4)

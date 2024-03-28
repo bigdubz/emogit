@@ -1,8 +1,10 @@
-import random
-import json
 import asyncio
-from cogs import edit_stats
+import json
+import random
+
 from discord.ext import commands
+
+from cogs import edit_stats
 
 deck = ["2♠", "3♠", "4♠", "5♠", "6♠", "7♠", "8♠", "9♠", "10♠", "J♠", "Q♠", "K♠", "A♠",
         "2♥", "3♥", "4♥", "5♥", "6♥", "7♥", "8♥", "9♥", "10♥", "J♥", "Q♥", "K♥", "A♥",
@@ -329,7 +331,7 @@ async def check_outcome(ctx: commands.Context):
         await ctx.send(f"<@{user_id}>\n"
                        f"your hand: {', '.join(p_hand)}\n"
                        f"your hand value: {p_hand_val}\n\n"
-                       f"{'natural blackjack' if check_natural(p_hand) else 'you win'}!\n" 
+                       f"{'natural blackjack' if check_natural(p_hand) else 'you win'}!\n"
                        f"you gained {bet_amount} points")
         edit_stats.add_points(ctx, 2 * bet_amount)
         game_data[user_id][game_id]["concluded"] = True
@@ -422,7 +424,7 @@ async def reshuffle(ctx):
         game_id = list(game_data[user_id].items())[1][0]
         del game_data[user_id][game_id]
 
-    if len(game_data[user_id]["deck"]) < len(deck)/2:
+    if len(game_data[user_id]["deck"]) < len(deck) / 2:
         game_data[user_id]["deck"] = deck
         await ctx.send("reshuffled the cards")
 

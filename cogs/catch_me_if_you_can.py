@@ -1,10 +1,12 @@
 import json
 import random
+
 import discord
-import main
-from cogs import edit_stats as es
 from discord import app_commands
 from discord.ext import commands
+
+import main
+from cogs import edit_stats as es
 
 GRID_SIZE = 11
 MAX_MOVES = GRID_SIZE * 2 - 1

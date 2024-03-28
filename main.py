@@ -1,13 +1,14 @@
 import asyncio
-import discord
-import random
-import utils
 import datetime
-import json
 import os
-from cogs import chatbot, scrapers, edit_stats as eus
+import random
+
+import discord
 from discord.ext import commands
 
+import json
+import utils
+from cogs import chatbot, scrapers, edit_stats as eus
 
 TOKEN = "MTEzNjQ2NzYzNDM1NTk2NjAxNQ.GT_knh.-RTm2dklcqHMM8vDjwwoGEbphvEeQjClShBBpE"
 intents = discord.Intents.all()
@@ -92,7 +93,7 @@ async def clear(action: discord.Interaction, amount: int):
 
     await action.response.send_message(f"deleted {amount} message{'s' if amount > 1 else ''}", delete_after=5)
     channel = bot.get_channel(action.channel.id)
-    messages = [msg async for msg in channel.history(limit=amount+1)]
+    messages = [msg async for msg in channel.history(limit=amount + 1)]
     await channel.delete_messages(messages)
 
 

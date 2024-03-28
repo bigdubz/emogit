@@ -1,11 +1,13 @@
 import asyncio
-import utils
-import yt_dlp
+
 import discord
+import yt_dlp
 from discord import app_commands
-from yt_dlp_py import YTDLSource
-from cogs import scrapers, edit_stats as stats
 from discord.ext import commands
+
+import utils
+from cogs import scrapers, edit_stats as stats
+from yt_dlp_py import YTDLSource
 
 song_queue = []
 song_data = {}
