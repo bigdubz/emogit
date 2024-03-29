@@ -24,9 +24,9 @@
     "451301920364167179": {
         "name": "_.dos._",
         "level": 106,
-        "xp": 180,
+        "xp": 190,
         "points": 804,
-        "total messages": 10201,
+        "total messages": 10203,
         "bonus claimed at": "2024-03-24 19:47:45.144041",
         "athan reminder": true,
         "weather updates": true,
@@ -117,7 +117,8 @@
         "total messages": 181,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
-        "weather updates": false
+        "weather updates": false,
+        "reminders": {}
     },
     "768846487186047076": {
         "name": "not_guru",
@@ -237,7 +238,8 @@
         "total messages": 97,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
-        "weather updates": false
+        "weather updates": false,
+        "reminders": {}
     },
     "909878737921790044": {
         "name": "waad32",

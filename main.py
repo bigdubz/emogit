@@ -30,8 +30,9 @@ async def on_ready():
     print('Ready')
 
     # This should always be executed last
-    await daily_toggleable()
-    await reminders.start_reminders()
+    # await daily_toggleable()
+    await bot.get_cog('Reminders').start_reminders()
+    # await reminders.start_reminders()
 
 
 
