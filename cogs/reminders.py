@@ -62,8 +62,10 @@ class Reminders(commands.Cog):
                 )
                 return
 
-        user_data["reminders"][name] = {"days": map(lambda x: weekdays[x], days_list), "times": times_list}
-        await action.response.send_message(f"reminder {name} successfully set on {days} at {', '.join(times_list)}")
+        user_data["reminders"][name] = {"days": list(map(lambda x: weekdays[x], days_list)), "times": times_list}
+        await action.response.send_message(
+            f"reminder {name} successfully set on {', '.join(days_list)} at {', '.join(times_list)}"
+        )
         es.edit_stats(await self.bot.get_context(action), str(action.user.id), _reminders=user_data["reminders"])
 
     async def start_reminders(self):
@@ -114,7 +116,7 @@ class Reminders(commands.Cog):
 
         for user in user_data:
             for reminder in user_data[user]["reminders"]:
-                if (current_day in user_data[user]["reminders"][reminder]["day"] and current_time in
+                if (current_day in user_data[user]["reminders"][reminder]["days"] and current_time in
                         user_data[user]["reminders"][reminder]["times"]):
                     gigachad = await self.bot.fetch_user(user)
                     await gigachad.send(f"{gigachad.name}, This is a reminder for {reminder}")

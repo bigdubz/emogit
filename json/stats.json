@@ -24,13 +24,50 @@
     "451301920364167179": {
         "name": "_.dos._",
         "level": 106,
-        "xp": 190,
+        "xp": 200,
         "points": 804,
-        "total messages": 10203,
+        "total messages": 10205,
         "bonus claimed at": "2024-03-24 19:47:45.144041",
         "athan reminder": true,
         "weather updates": true,
-        "reminders": {}
+        "reminders": {
+            "inhaler": {
+                "days": [
+                    6,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "times": [
+                    "10:00 AM",
+                    "10:00 PM"
+                ]
+            },
+            "acapella": {
+                "days": [
+                    6,
+                    1,
+                    3
+                ],
+                "times": [
+                    "07:00 AM"
+                ]
+            },
+            "acapella1": {
+                "days": [
+                    0,
+                    2,
+                    4,
+                    5
+                ],
+                "times": [
+                    "09:00 AM"
+                ]
+            }
+        }
     },
     "488359917124583424": {
         "name": "Spectre",
@@ -206,7 +243,44 @@
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": true,
         "weather updates": true,
-        "reminders": {}
+        "reminders": {
+            "inhaler": {
+                "days": [
+                    6,
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5
+                ],
+                "times": [
+                    "10:00 AM",
+                    "10:00 PM"
+                ]
+            },
+            "Acapella 1": {
+                "days": [
+                    6,
+                    1,
+                    3
+                ],
+                "times": [
+                    "07:00 AM"
+                ]
+            },
+            "Acapella 2": {
+                "days": [
+                    0,
+                    2,
+                    4,
+                    5
+                ],
+                "times": [
+                    "09:00 AM"
+                ]
+            }
+        }
     },
     "608368964757618698": {
         "name": "kl1",

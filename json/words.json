@@ -61763,22 +61763,84 @@
     "911916175271796748": {
         "chatter": false,
         "phrases": {
+            "0700": {
+                "bad": [
+                    "0700"
+                ],
+                "good": [
+                    "AM"
+                ]
+            },
+            "0900": {
+                "bad": [
+                    "0900"
+                ],
+                "good": [
+                    "AM"
+                ]
+            },
+            "AM": {
+                "bad": [
+                    "AM"
+                ],
+                "good": []
+            },
             "a": {
                 "bad": [
                     "a"
                 ],
                 "good": []
             },
+            "acapella": {
+                "bad": [
+                    "acapella"
+                ],
+                "good": [
+                    "mondaywednesdayfridaysaturday",
+                    "sundaytuesdaythursday"
+                ]
+            },
+            "createreminder": {
+                "bad": [
+                    "createreminder"
+                ],
+                "good": [
+                    "acapella"
+                ]
+            },
             "hey": {
                 "bad": [
                     "hey"
                 ],
                 "good": []
+            },
+            "mondaywednesdayfridaysaturday": {
+                "bad": [
+                    "mondaywednesdayfridaysaturday"
+                ],
+                "good": [
+                    "0900"
+                ]
+            },
+            "sundaytuesdaythursday": {
+                "bad": [
+                    "sundaytuesdaythursday"
+                ],
+                "good": [
+                    "0700"
+                ]
             }
         },
         "words": [
+            "0700",
+            "0900",
+            "AM",
             "a",
-            "hey"
+            "acapella",
+            "createreminder",
+            "hey",
+            "mondaywednesdayfridaysaturday",
+            "sundaytuesdaythursday"
         ]
     }
 }
