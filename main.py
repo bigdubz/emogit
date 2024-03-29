@@ -1,5 +1,3 @@
-import asyncio
-import datetime
 import os
 import random
 
@@ -8,7 +6,7 @@ from discord.ext import commands
 
 import json
 import utils
-from cogs import chatbot, scrapers, reminders, edit_stats as eus
+from cogs import chatbot, edit_stats as eus
 
 TOKEN = "MTEzNjQ2NzYzNDM1NTk2NjAxNQ.GT_knh.-RTm2dklcqHMM8vDjwwoGEbphvEeQjClShBBpE"
 intents = discord.Intents.all()
