@@ -90,7 +90,7 @@ def get_athan_time():
 
         elif i % 2 != 0 and i != 3:
             t = datetime.datetime.strptime(td[i].text.strip(), "%I:%M %p").time()
-            t_obj = datetime.time(t.hour + 1 if t.hour + 1 < 24 else 0, t.minute)
+            t_obj = datetime.time(t.hour if t.hour < 24 else 0, t.minute)
             time = datetime.time.strftime(t_obj, "%I:%M %p")
             times.append(time)
 

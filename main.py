@@ -14,7 +14,6 @@ intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 auth = "451301920364167179"
-song_queue = []
 song_data = {}
 
 

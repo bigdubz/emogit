@@ -70,10 +70,8 @@ class Reminders(commands.Cog):
 
     async def start_reminders(self):
         weather_time = "07:00 AM"
-        channel_id = 1170131569747439747
         prayer, prayer_time = scrapers.get_athan_time()
         prayer_time_obj = datetime.datetime.strptime(prayer_time, "%I:%M %p").time()
-        await self.bot.get_channel(channel_id).send(f"upcoming {prayer} athan at {prayer_time}")
 
         # Main reminder check
         while True:
@@ -103,7 +101,6 @@ class Reminders(commands.Cog):
                         f" here's today's weather forecast:\n\n{scrapers.weather_stats_today()}")
 
         await self.send_reminder_messages()
-        await self.bot.get_channel(channel_id).send(f"{prayer} athan now at {prayer_time}")
         await asyncio.sleep(180)
         await self.start_reminders()
 
