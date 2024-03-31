@@ -137,54 +137,53 @@ class Cmiyc(commands.Cog):
         game_id = await find_game(action, str(action.user.id))
         await get_outcome(action, game_id)
 
+    async def get_outcome(self, action: discord.Interaction, game_id):
+        with open("json/cmiyc.json", "r") as file:
+            games = json.load(file)
 
-async def get_outcome(action: discord.Interaction, game_id):
-    with open("json/cmiyc.json", "r") as file:
-        games = json.load(file)
+        if game_id not in games:
+            return
 
-    if game_id not in games:
-        return
+        games[game_id]["map"] = get_grid(games[game_id])
+        message = ""
 
-    games[game_id]["map"] = get_grid(games[game_id])
-    message = ""
+        for y in games[game_id]["map"]:
+            for x in y:
+                message += x
+            message += "\n"
 
-    for y in games[game_id]["map"]:
-        for x in y:
-            message += x
-        message += "\n"
+        embed = discord.Embed(description=message, color=0x00ffff)
+        challenger_id = games[game_id]["challenger"]["id"]
+        opponent_id = games[game_id]["opponent"]["id"]
+        bet_amount = games[game_id]["bet amount"]
+        if games[game_id]["opponent"]["position"] == games[game_id]["challenger"]["position"]:
+            await action.channel.send(
+                f"<@{challenger_id}> wins by catching opponent! "
+                f"they gained {bet_amount} points", embed=embed
+            )
+            name = main.bot.get_user(int(challenger_id))
+            es.add_points(await self.bot.get_context(action), 2 * bet_amount, override_id=challenger_id, name=name)
+            del games[game_id]
+            with open("json/cmiyc.json", "w") as file:
+                json.dump(games, file)
 
-    embed = discord.Embed(description=message, color=0x00ffff)
-    challenger_id = games[game_id]["challenger"]["id"]
-    opponent_id = games[game_id]["opponent"]["id"]
-    bet_amount = games[game_id]["bet amount"]
-    if games[game_id]["opponent"]["position"] == games[game_id]["challenger"]["position"]:
-        await action.channel.send(
-            f"<@{challenger_id}> wins by catching opponent! "
-            f"they gained {bet_amount} points", embed=embed
-        )
-        name = main.bot.get_user(int(challenger_id))
-        es.add_points(await self.bot.get_context(action), 2 * bet_amount, override_id=challenger_id, name=name)
-        del games[game_id]
-        with open("json/cmiyc.json", "w") as file:
-            json.dump(games, file)
+            return
 
-        return
+        elif games[game_id]["total moves"] > MAX_MOVES:
+            await action.channel.send(
+                f"<@{opponent_id}> wins by surviving! they gained {bet_amount} points", embed=embed
+            )
+            name = main.bot.get_user(int(opponent_id))
+            es.add_points(await self.bot.get_context(action), 2 * bet_amount, override_id=opponent_id, name=name)
+            del games[game_id]
+            with open("json/cmiyc.json", "w") as file:
+                json.dump(games, file)
 
-    elif games[game_id]["total moves"] > MAX_MOVES:
-        await action.channel.send(
-            f"<@{opponent_id}> wins by surviving! they gained {bet_amount} points", embed=embed
-        )
-        name = main.bot.get_user(int(opponent_id))
-        es.add_points(await self.bot.get_context(action), 2 * bet_amount, override_id=opponent_id, name=name)
-        del games[game_id]
-        with open("json/cmiyc.json", "w") as file:
-            json.dump(games, file)
+            return
 
-        return
-
-    turn_id = games[game_id]["turn"]
-    buttons = Buttons(game_id)
-    await action.channel.send(f"<@{turn_id}> its your turn", embed=embed, view=buttons)
+        turn_id = games[game_id]["turn"]
+        buttons = Buttons(game_id)
+        await action.channel.send(f"<@{turn_id}> its your turn", embed=embed, view=buttons)
 
 
 # noinspection PyUnusedLocal
