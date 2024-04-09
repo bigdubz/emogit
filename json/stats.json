@@ -24,58 +24,21 @@
     "451301920364167179": {
         "name": "_.dos._",
         "level": 106,
-        "xp": 380,
+        "xp": 405,
         "points": 822,
-        "total messages": 10241,
+        "total messages": 10246,
         "bonus claimed at": "2024-04-01 00:56:37.293630",
         "athan reminder": true,
         "weather updates": true,
-        "reminders": {
-            "inhaler": {
-                "days": [
-                    6,
-                    0,
-                    1,
-                    2,
-                    3,
-                    4,
-                    5
-                ],
-                "times": [
-                    "10:00 AM",
-                    "10:00 PM"
-                ]
-            },
-            "acapella": {
-                "days": [
-                    6,
-                    1,
-                    3
-                ],
-                "times": [
-                    "07:00 AM"
-                ]
-            },
-            "acapella1": {
-                "days": [
-                    0,
-                    2,
-                    4,
-                    5
-                ],
-                "times": [
-                    "09:00 AM"
-                ]
-            }
-        }
+        "reminders": {}
     },
     "488359917124583424": {
         "name": "Spectre",
         "level": 126,
         "xp": 675,
-        "points": 40,
+        "points": 65,
         "total messages": 13315,
-        "bonus claimed at": "2024-03-23 16:12:44.708935",
+        "bonus claimed at": "2024-04-09 05:49:46.119788",
         "athan reminder": true,
         "weather updates": false,
         "reminders": {}
@@ -83,9 +46,9 @@
     "489443582202085404": {
         "name": "syipy",
         "level": 18,
-        "xp": 45,
-        "points": 91,
-        "total messages": 408,
+        "xp": 185,
+        "points": 100,
+        "total messages": 436,
         "bonus claimed at": "2024-01-05 03:57:26.981886",
         "athan reminder": false,
         "weather updates": false,
@@ -94,9 +57,9 @@
     "693810707313066045": {
         "name": "abojamjam",
         "level": 10,
-        "xp": 75,
-        "points": 61,
-        "total messages": 157,
+        "xp": 110,
+        "points": 64,
+        "total messages": 164,
         "bonus claimed at": "2023-12-09 02:24:59.712454",
         "athan reminder": false,
         "weather updates": false,
@@ -115,10 +78,10 @@
     },
     "331993325915865098": {
         "name": "hirotto",
-        "level": 41,
-        "xp": 350,
-        "points": 649,
-        "total messages": 1950,
+        "level": 43,
+        "xp": 420,
+        "points": 714,
+        "total messages": 2142,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": true,
         "weather updates": false,
@@ -127,9 +90,9 @@
     "1162067455351463956": {
         "name": "foisal420",
         "level": 49,
-        "xp": 75,
-        "points": 885,
-        "total messages": 2655,
+        "xp": 505,
+        "points": 912,
+        "total messages": 2741,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": true,
         "weather updates": false,
@@ -138,9 +101,9 @@
     "421963655186350082": {
         "name": "ano_o3",
         "level": 10,
-        "xp": 60,
+        "xp": 70,
         "points": 46,
-        "total messages": 156,
+        "total messages": 158,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -148,6 +111,50 @@
     },
     "323232873341779978": {
         "name": "stxiz",
+        "level": 14,
+        "xp": 160,
+        "points": 92,
+        "total messages": 292,
+        "bonus claimed at": "2000-01-01 00:00:00.000001",
+        "athan reminder": false,
+        "weather updates": false,
+        "reminders": {}
+    },
+    "768846487186047076": {
+        "name": "not_guru",
+        "level": 22,
+        "xp": 150,
+        "points": 199,
+        "total messages": 618,
+        "bonus claimed at": "2000-01-01 00:00:00.000001",
+        "athan reminder": false,
+        "weather updates": false,
+        "reminders": {}
+    },
+    "675307059180470281": {
+        "name": "ysot.b",
+        "level": 16,
+        "xp": 0,
+        "points": 106,
+        "total messages": 330,
+        "bonus claimed at": "2000-01-01 00:00:00.000001",
+        "athan reminder": false,
+        "weather updates": false,
+        "reminders": {}
+    },
+    "240485211769536513": {
+        "name": "tg4x",
+        "level": 24,
+        "xp": 5,
+        "points": 223,
+        "total messages": 691,
+        "bonus claimed at": "2000-01-01 00:00:00.000001",
+        "athan reminder": false,
+        "weather updates": false,
+        "reminders": {}
+    },
+    "929066724563767387": {
+        "name": "kamisoup",
         "level": 14,
         "xp": 85,
         "points": 86,
@@ -157,56 +164,12 @@
         "weather updates": false,
         "reminders": {}
     },
-    "768846487186047076": {
-        "name": "not_guru",
-        "level": 21,
-        "xp": 210,
-        "points": 188,
-        "total messages": 582,
-        "bonus claimed at": "2000-01-01 00:00:00.000001",
-        "athan reminder": false,
-        "weather updates": false,
-        "reminders": {}
-    },
-    "675307059180470281": {
-        "name": "ysot.b",
-        "level": 14,
-        "xp": 105,
-        "points": 89,
-        "total messages": 281,
-        "bonus claimed at": "2000-01-01 00:00:00.000001",
-        "athan reminder": false,
-        "weather updates": false,
-        "reminders": {}
-    },
-    "240485211769536513": {
-        "name": "tg4x",
-        "level": 23,
-        "xp": 200,
-        "points": 215,
-        "total messages": 678,
-        "bonus claimed at": "2000-01-01 00:00:00.000001",
-        "athan reminder": false,
-        "weather updates": false,
-        "reminders": {}
-    },
-    "929066724563767387": {
-        "name": "kamisoup",
-        "level": 14,
-        "xp": 20,
-        "points": 83,
-        "total messages": 264,
-        "bonus claimed at": "2000-01-01 00:00:00.000001",
-        "athan reminder": false,
-        "weather updates": false,
-        "reminders": {}
-    },
     "707589554772770886": {
         "name": "ten.zxy",
         "level": 9,
-        "xp": 35,
-        "points": 36,
-        "total messages": 127,
+        "xp": 65,
+        "points": 39,
+        "total messages": 133,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -214,10 +177,10 @@
     },
     "407873350728155146": {
         "name": "demooninnit",
-        "level": 16,
-        "xp": 150,
-        "points": 115,
-        "total messages": 360,
+        "level": 17,
+        "xp": 175,
+        "points": 128,
+        "total messages": 403,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": true,
         "weather updates": false,
@@ -237,9 +200,9 @@
     "608368964757618698": {
         "name": "kl1",
         "level": 8,
-        "xp": 80,
+        "xp": 95,
         "points": 33,
-        "total messages": 114,
+        "total messages": 117,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -280,10 +243,10 @@
     },
     "757426397655597118": {
         "name": "atheer_7",
-        "level": 35,
-        "xp": 30,
-        "points": 468,
-        "total messages": 1400,
+        "level": 36,
+        "xp": 335,
+        "points": 510,
+        "total messages": 1537,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -357,10 +320,10 @@
     },
     "358626186970005506": {
         "name": "kabuto._",
-        "level": 23,
-        "xp": 180,
-        "points": 219,
-        "total messages": 674,
+        "level": 25,
+        "xp": 10,
+        "points": 244,
+        "total messages": 746,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": true,
         "weather updates": false,
@@ -402,9 +365,9 @@
     "407565679856975872": {
         "name": "heso4610",
         "level": 12,
-        "xp": 50,
-        "points": 63,
-        "total messages": 208,
+        "xp": 120,
+        "points": 69,
+        "total messages": 222,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -457,9 +420,9 @@
     "322128610481799169": {
         "name": "tousenski",
         "level": 4,
-        "xp": 50,
+        "xp": 55,
         "points": 12,
-        "total messages": 40,
+        "total messages": 41,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -479,9 +442,9 @@
     "609457061482201105": {
         "name": "zues_4211",
         "level": 4,
-        "xp": 35,
-        "points": 9,
-        "total messages": 37,
+        "xp": 55,
+        "points": 12,
+        "total messages": 41,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -534,9 +497,9 @@
     "455124133282578437": {
         "name": "7shesh",
         "level": 2,
-        "xp": 30,
+        "xp": 35,
         "points": 3,
-        "total messages": 14,
+        "total messages": 15,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -545,9 +508,9 @@
     "356773534384521228": {
         "name": "dragonmax64",
         "level": 3,
-        "xp": 45,
+        "xp": 50,
         "points": 6,
-        "total messages": 27,
+        "total messages": 28,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -610,10 +573,10 @@
     },
     "231655893710798848": {
         "name": "shadow_blade_",
-        "level": 13,
-        "xp": 125,
-        "points": 79,
-        "total messages": 253,
+        "level": 15,
+        "xp": 10,
+        "points": 93,
+        "total messages": 296,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -622,9 +585,9 @@
     "517040297960800257": {
         "name": "wyatt1805",
         "level": 1,
-        "xp": 10,
+        "xp": 25,
         "points": 0,
-        "total messages": 2,
+        "total messages": 5,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -654,10 +617,10 @@
     },
     "837030409061269564": {
         "name": "raghedd",
-        "level": 10,
-        "xp": 60,
-        "points": 46,
-        "total messages": 156,
+        "level": 12,
+        "xp": 105,
+        "points": 66,
+        "total messages": 219,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -666,9 +629,9 @@
     "441938339235495936": {
         "name": "lil_jam3",
         "level": 1,
-        "xp": 10,
+        "xp": 15,
         "points": 0,
-        "total messages": 2,
+        "total messages": 3,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -709,10 +672,10 @@
     },
     "402431201605976077": {
         "name": "mort6969",
-        "level": 2,
-        "xp": 0,
-        "points": 0,
-        "total messages": 8,
+        "level": 4,
+        "xp": 5,
+        "points": 9,
+        "total messages": 31,
         "bonus claimed at": "2000-01-01 00:00:00.000001",
         "athan reminder": false,
         "weather updates": false,
@@ -764,6 +727,17 @@
     },
     "933808453053452318": {
         "name": "vuqla",
+        "level": 2,
+        "xp": 40,
+        "points": 3,
+        "total messages": 16,
+        "bonus claimed at": "2000-01-01 00:00:00.000001",
+        "athan reminder": false,
+        "weather updates": false,
+        "reminders": {}
+    },
+    "792063423294865462": {
+        "name": "op_fx",
         "level": 1,
         "xp": 15,
         "points": 0,

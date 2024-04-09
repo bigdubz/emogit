@@ -87,9 +87,8 @@ class Reminders(commands.Cog):
                 if user_data[user]["athan reminder"]:
                     gigachad = await self.bot.fetch_user(user)
                     await gigachad.send(
-                        f"Ramadan Kareem!!\n"
-                        f"{'gigachad' if user != '697855051779014796' else 'gigashort'},"  # if user isnt jana
-                        f" {prayer} athan now at {prayer_time}"
+                        f"Eid Mubarak, gigachad :heart: وبعد\n"
+                        f"{prayer} athan now at {prayer_time}"
                     )
 
         if datetime.datetime.now().time().strftime("%H:%M %p") == weather_time:
