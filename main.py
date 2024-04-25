@@ -102,7 +102,11 @@ async def send_commands(action: discord.Interaction):
 
 
 async def chatter(msg: discord.Message):
-    guild_id = str(msg.guild.id)
+    try:
+        guild_id = str(msg.guild.id)
+    except AttributeError:
+        return
+
     with open("json/words.json", "r") as file:
         data = json.load(file)
 

@@ -21,7 +21,10 @@ async def record_words(msg: discord.Message):
     try:
         guild_id = str(msg.guild.id)
     except AttributeError:
-        print(f"{msg.author.name} sent DM'd a message to the bot: \"{message}\"")
+        print(f"\n================================\n\n"
+              f"{msg.author.name} sent a DM to the bot: \"{message}\""
+              f"\n\n================================\n")
+        return
 
     if not message.startswith("!talk") and message.startswith("!"):
         return
