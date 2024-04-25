@@ -18,7 +18,11 @@ blacklist = ["allah", "islam", "muslim", "god", "athan", "allahu", "amna", "aya"
 
 async def record_words(msg: discord.Message):
     message: str = msg.content
-    guild_id = str(msg.guild.id)
+    try:
+        guild_id = str(msg.guild.id)
+    except AttributeError:
+        print(f"{msg.author.name} sent DM'd a message to the bot: \"{message}\"")
+
     if not message.startswith("!talk") and message.startswith("!"):
         return
 
