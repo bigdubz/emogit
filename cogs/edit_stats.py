@@ -91,37 +91,37 @@ class UserStats(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @app_commands.command(name='donate', description='Donates points to another user')
-    async def give_points(self, action: discord.Interaction, mention: str, amount: int):
+    @commands.hybrid_command(name='donate', description='Donates points to another user')
+    async def give_points(self, ctx: commands.Context, mention: str, amount: int):
         receiver_id = mention[2:-1]
-        giver_id = str(action.user.id)
+        giver_id = str(ctx.author.id)
         with open("json/stats.json", "r") as file:
             user_data = json.load(file)
 
         if user_data[giver_id]['points'] < amount:
-            await action.response.send_message(
-                f"<@{action.message.author.id}> you do not have enough points, poor", delete_after=5
+            await ctx.send(
+                f"<@{ctx.message.author.id}> you do not have enough points, poor", delete_after=5
             )
             return
 
         if amount < 1:
-            await action.response.send_message("tryna cheat ya piece of shit?", delete_after=5)
+            await ctx.send("tryna cheat ya piece of shit?", delete_after=5)
             return
 
         if giver_id == receiver_id:
-            await action.response.send_message("so fking dumb", delete_after=5)
+            await ctx.send("so fking dumb", delete_after=5)
             return
 
         if len(receiver_id) >= 18:
-            name = (await action.guild.query_members(user_ids=[int(receiver_id)]))[0].name
-            add_points(await self.bot.get_context(action), -amount)
-            add_points(await self.bot.get_context(action), amount, receiver_id, name)
-            await action.response.send_message(
-                f"<@{giver_id}> gave {amount} point {'s' if amount > 1 else ''} to {mention}"
+            name = (await ctx.guild.query_members(user_ids=[int(receiver_id)]))[0].name
+            add_points(ctx, -amount)
+            add_points(ctx, amount, receiver_id, name)
+            await ctx.send(
+                f"<@{giver_id}> gave {amount} point{'s' if amount > 1 else ''} to {mention}"
             )
 
         else:
-            await action.response.send_message("user not found", delete_after=5)
+            await ctx.send("user not found", delete_after=5)
 
     @commands.hybrid_command(name='roll', description='Gambles points with a 50% chance of winning')
     async def roll(self, ctx: commands.Context, amount: str = None):
