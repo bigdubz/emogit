@@ -4,3 +4,4 @@
 *.webm
 *.json
 *.env
+/emovenv

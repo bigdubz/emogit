@@ -11,7 +11,7 @@ from cogs import chatbot, edit_stats as eus
 
 load_dotenv()
 
-TOKEN = os.getenv("TOKEN")
+TOKEN = os.getenv('TOKEN')
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='!', intents=intents)
