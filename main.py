@@ -69,33 +69,43 @@ async def sync(ctx: discord.ext.commands.Context):
 @bot.tree.command(name='commands', description='DMs you the currently available commands')
 async def send_commands(action: discord.Interaction):
     embed = discord.Embed(title="Commands", description="", color=0x00ffff)
-    embed.add_field(name="!join", value="Join sender's voice channel", inline=True)
-    embed.add_field(name="!leave", value="Leave voice channel", inline=True)
-    embed.add_field(name="!play", value="or `!p`\n`!play <Song>`\nPlays first youtube video that pops up"
+    embed.add_field(name="/join", value="Join sender's voice channel", inline=True)
+    embed.add_field(name="/leave", value="Leave voice channel", inline=True)
+    embed.add_field(name="/play", value="`/play <Song>`\nPlays first youtube video that pops up"
                                         " from the `<Song>` parameter", inline=True)
-    embed.add_field(name="!stop", value="Stops playing music and clears queue", inline=True)
-    embed.add_field(name="!clearq", value="Clears queue", inline=True)
-    embed.add_field(name="!pause", value="Pauses the current song", inline=True)
-    embed.add_field(name="!unpause", value="or `!resume`\nResumes the current song", inline=True)
-    embed.add_field(name="!queue", value="Shows current song queue", inline=True)
-    embed.add_field(name="!skip", value="Skips to next song in queue", inline=True)
-    embed.add_field(name="!playq", value="or `!pq`\n`!playq <NumFromQueue>`\nPlays a song from"
+    embed.add_field(name="/stop", value="Stops playing music and clears queue", inline=True)
+    embed.add_field(name="/clearq", value="Clears queue", inline=True)
+    embed.add_field(name="/pause", value="Pauses the current song", inline=True)
+    embed.add_field(name="/unpause", value="Resumes the current song", inline=True)
+    embed.add_field(name="/queue", value="Shows current song queue", inline=True)
+    embed.add_field(name="/skip", value="Skips to next song in queue", inline=True)
+    embed.add_field(name="/playq", value="`/playq <NumFromQueue>`\nPlays a song from"
                                          " the queue", inline=True)
-    embed.add_field(name="!remove", value="`!remove <NumFromQueue>`\nRemoves a song from queue", inline=True)
-    embed.add_field(name="!points", value="or `!pts`\nShows your current points", inline=True)
-    embed.add_field(name="!level", value="Shows your current level", inline=True)
-    embed.add_field(name="!claim", value="Claim your daily points", inline=True)
-    embed.add_field(name="!give", value="or `!donate`\n`!give <UserMention> <Amount>`\n"
-                                        "Gives the mentioned user `<Amount>` points from your account", inline=True)
-    embed.add_field(name="!roll", value="or `!bet`\n`!roll <BetAmount>`\nGambles `<BetAmount>` points"
+    embed.add_field(name="/remove", value="`/remove <NumFromQueue>`\nRemoves a song from queue", inline=True)
+    embed.add_field(name="/points", value="Shows your current points", inline=True)
+    embed.add_field(name="/level", value="Shows your current level", inline=True)
+    embed.add_field(name="/claim", value="Claim your daily points", inline=True)
+    embed.add_field(name="/donate", value="`/donate <UserMention> <Amount>`\n"
+                                          "Gives the mentioned user `<Amount>` points from your account", inline=True)
+    embed.add_field(name="/roll", value="`/roll <BetAmount>`\nGambles `<BetAmount>` points"
                                         " with a 50% chance of winning", inline=True)
-    embed.add_field(name="!blackjack", value="or `!bj`\n`!blackjack <BetAmount>`\nStarts a game of blackjack with "
-                                             "a bet of `<BetAmount>`!", inline=True)
-    embed.add_field(name="!athan", value="or `!reminders`\nToggle prayer athan reminders, "
-                                         "sends you DMs at athan times", inline=True)
-    embed.add_field(name="!cmiyc", value="or `!catch`\n`!cmiyc <UserMention> <BetAmount>`\n"
+    embed.add_field(name="/blackjack", value="`/blackjack <BetAmount>`\nStarts a game of blackjack against the bot with"
+                                             " a bet of `<BetAmount>`", inline=True)
+    embed.add_field(name="/athan", value="Toggle prayer athan reminders, sends you DMs at athan times", inline=True)
+    embed.add_field(name="/catch", value="`/catch <UserMention> <BetAmount>`\n"
                                          "starts a catch game against `<UserMention>`"
                                          " with bet amount `<BetAmount>`", inline=True)
+    embed.add_field(name="/createreminder", value="`/createreminder <Name> <Days> <times>`, "
+                                                  "Sets a reminder with name `<Name>`, on the days `<Days>`"
+                                                  "and at the times `<Times>`\n"
+                                                  "Example usage: "
+                                                  "`/createreminder jigglin 1,2 04:20 AM, 12:00 PM`\n"
+                                                  "in this case, a reminder with name 'jigglin' was set on the days "
+                                                  "tuesday and wednesday and will be triggered at"
+                                                  " 04:20 AM and 12:00 PM.", inline=True)
+    embed.add_field(name="/talk", value="or `!talk`\n`/talk <Message>`\n"
+                                        "Sends a random message using the "
+                                        "current server's word dictionary", inline=True)
     user = await bot.fetch_user(action.user.id)
     await user.send(embed=embed)
     await action.response.send_message("DMed you the current bot commands", delete_after=5)

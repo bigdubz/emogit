@@ -32,7 +32,7 @@ class Reminders(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
-    @app_commands.command(name="createreminder")
+    @app_commands.command(name="createreminder", description="Sets a custom reminder")
     async def create_reminder(self,
                               action: discord.Interaction,
                               name: str,
