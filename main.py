@@ -3,12 +3,15 @@ import random
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
 
 import json
 import utils
 from cogs import chatbot, edit_stats as eus
 
-TOKEN = "MTEzNjQ2NzYzNDM1NTk2NjAxNQ.GT_knh.-RTm2dklcqHMM8vDjwwoGEbphvEeQjClShBBpE"
+load_dotenv()
+
+TOKEN = os.getenv("TOKEN")
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='!', intents=intents)
