@@ -3,6 +3,7 @@ import datetime
 import json
 
 import discord
+from discord.errors import Forbidden
 from discord import app_commands
 from discord.ext import commands
 
@@ -86,9 +87,14 @@ class Reminders(commands.Cog):
             for user in user_data:
                 if user_data[user]["athan reminder"]:
                     gigachad = await self.bot.fetch_user(user)
-                    await gigachad.send(
-                        f"gigachad, {prayer} athan now at {prayer_time}"
-                    )
+                    try:
+                        await gigachad.send(
+                            f"gigachad, {prayer} athan now at {prayer_time}"
+                        )
+
+                    except Forbidden:
+                        print(f"couldn't send message to {gigachad.name}!")
+
 
         if datetime.datetime.now().time().strftime("%H:%M %p") == weather_time:
             for user in user_data:
