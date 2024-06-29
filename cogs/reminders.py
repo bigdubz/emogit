@@ -1,13 +1,14 @@
 import asyncio
 import datetime
 import json
-
+import scrapers
+import edit_stats as es
 import discord
+
 from discord.errors import Forbidden
 from discord import app_commands
 from discord.ext import commands
 
-from cogs import scrapers, edit_stats as es
 
 weekdays = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
 

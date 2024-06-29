@@ -1,12 +1,11 @@
 import datetime
 import json
-from random import choice
-
 import requests
-from bs4 import BeautifulSoup as bs
-from discord.ext import commands
+import edit_stats as eus
 
-from cogs import edit_stats as eus
+from bs4 import BeautifulSoup as bs
+from random import choice
+from discord.ext import commands
 
 
 class Scrapers(commands.Cog):
