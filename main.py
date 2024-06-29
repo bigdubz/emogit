@@ -29,7 +29,7 @@ async def on_ready():
     utils.delete_music(song_data)
     print('Ready')
 
-    # This should always be executed last
+    # This should always be executed last (because of infinite while loop)
     await bot.get_cog('Reminders').start_reminders()
 
 
@@ -111,7 +111,7 @@ async def send_commands(action: discord.Interaction):
                                         "current server's word dictionary", inline=True)
     user = await bot.fetch_user(action.user.id)
     await user.send(embed=embed)
-    await action.response.send_message("DMed you the current bot commands", delete_after=5)
+    await action.response.send_message("DM'd you the current bot commands", delete_after=5)
 
 
 async def chatter(msg: discord.Message):

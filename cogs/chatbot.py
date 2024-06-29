@@ -12,7 +12,7 @@ allowed_characters = ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
 blacklist = ["allah", "islam", "muslim", "god", "athan", "allahu", "amna", "aya",
              ">m", ">rs", ">osu", ">c", "s", "k", "q", "r", "e", "t", "y", "u",
              "o", "p", "d", "f", "g", "h", "j", "l", "m", "n", "z", "x", "c",
-             "v", "b", "Q", "E", "R", "T", "Y", "U", "O", "p", "S", "D", "F",
+             "v", "b", "Q", "E", "R", "T", "Y", "U", "O", "P", "S", "D", "F",
              "G", "H", "J", "K", "L", "Z", "X", "C", "V", "B", "N", "M"]
 
 
@@ -108,7 +108,7 @@ class Chatbot(commands.Cog):
 
         sentence_length = len(sentence.split())
         message = []
-        message_length = random.randint(sentence_length, sentence_length + 4)
+        message_length = random.randint(sentence_length, sentence_length + 10)
         for x in range(message_length):
             try:
                 while True:
