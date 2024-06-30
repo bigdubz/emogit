@@ -1,8 +1,7 @@
 import asyncio
 import discord
 import yt_dlp
-import scrapers
-import edit_stats as stats
+from cogs import scrapers, edit_stats as stats
 import utils
 
 from discord import app_commands

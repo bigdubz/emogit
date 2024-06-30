@@ -2,7 +2,7 @@ import main
 import json
 import random
 import discord
-import edit_stats as es
+from cogs import edit_stats as es
 
 from discord import app_commands
 from discord.ext import commands

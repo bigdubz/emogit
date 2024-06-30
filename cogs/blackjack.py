@@ -1,7 +1,7 @@
 import asyncio
 import json
 import random
-import edit_stats
+from cogs import edit_stats
 
 from discord.ext import commands
 
@@ -23,7 +23,7 @@ class Blackjack(commands.Cog):
         self.bot = bot
 
     @commands.hybrid_command(name='blackjack', description='Starts a Blackjack game with bet')
-    async def blackjack(self, ctx: commands.Context, bet_amount: str):
+    async def blackjack(self, ctx: commands.Context, bet_amount: str = None):
         user_id = str(ctx.author.id)
         if bet_amount is None:
             await ctx.send("you need to bet an amount!\n`!blackjack <BetAmount>`", delete_after=5)

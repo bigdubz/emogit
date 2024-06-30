@@ -1,7 +1,7 @@
 import datetime
 import json
 import requests
-import edit_stats as eus
+from cogs import edit_stats as eus
 
 from bs4 import BeautifulSoup as bs
 from random import choice

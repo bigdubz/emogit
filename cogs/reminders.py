@@ -1,10 +1,9 @@
 import asyncio
 import datetime
 import json
-import scrapers
-import edit_stats as es
 import discord
 
+from cogs import scrapers, edit_stats as es
 from discord.errors import Forbidden
 from discord import app_commands
 from discord.ext import commands
