@@ -103,7 +103,7 @@ class Stonks(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    # TODO commands to make: sell_token, track_holdings, show_graph
+    # TODO commands to make: track_holdings, show_graph
     # TODO data validation (make sure everything is entered and is in correct format)
     @commands.command(name="transfer")
     async def transfer(self, ctx: commands.Context, amount):
@@ -174,12 +174,19 @@ class Stonks(commands.Cog):
             token_data = json.load(file)
 
         for tok_id, info in data[user_id]['holdings'].items():
-            tok_price = token_data[tok_id]['price']
+            token = construct_token(tok_id, token_data[tok_id])
+            selling_price_total = round(token.price * info['holding'], 2)
+            token.update_market_cap(-token.holders[user_id])
+            selling_price_with_capital_removed = round(token.price * info['holding'], 2)
+            token.update_market_cap(token.holders[user_id])
+
+            pnl = round(100 * selling_price_with_capital_removed/token.holders[user_id] - 100, 2)
             embed.add_field(
                 name = info['symbol'],
-                value = f"price: {round(tok_price*1000000000, -3)/1000000000}\n"
-                        f"{round(info['holding'], 0)} total tokens owned\n"
-                        f"worth {round(tok_price * info['holding'], 2)} points",
+                value = f"price: {round(token.price*1000000000, -3)/1000000000}\n"
+                        f"{int(info['holding'])} total tokens owned\n"
+                        f"worth {selling_price_total} points\n"
+                        f"P&L: {selling_price_with_capital_removed} ({'+' if pnl >= 0 else ''}{pnl}%)",
                 inline = False
             )
 
@@ -274,13 +281,13 @@ def add_token(tok: Token, checks=False) -> str:
     if checks: 
         with open("json/stonks.json", "w") as file:
             dev_data[tok.developer_id]['points'] -= BASE_MARKET_CAP
-            dev_data[tok.developer_id]['tokens deving'].append(f"{tok.name} (ca: \"{tok.token_id}\")")
+            dev_data[tok.developer_id]['tokens deving'].append(f"{tok.name} (ca: {tok.token_id})")
             json.dump(dev_data, file, indent=4)
 
     with open("json/tokens.json", "w") as file:
         json.dump(data, file, indent=4)
 
-    return f"successfully created \"{tok.name}\"! you can now buy it with `!buy \"{tok.name}\" <points to invest>`"
+    return f"successfully created \"{tok.name}\"! you can now buy it with `!buy \"{tok.token_id}\" <points to invest>`"
     
 
 def add_holder(id: str) -> None:
