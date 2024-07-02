@@ -103,18 +103,24 @@ class Stonks(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    # TODO commands to make: track_holdings, show_graph
+    # TODO commands to make: show_graph
     # TODO data validation (make sure everything is entered and is in correct format)
     @commands.command(name="transfer")
-    async def transfer(self, ctx: commands.Context, amount):
-        amount = int(amount)
+    async def transfer(self, ctx: commands.Context, amount: str = None):
         user_id = str(ctx.message.author.id)
+        add_holder(user_id)
+
+        if amount is None:
+            await ctx.send("`!cashout <amount>`")
+            return
+
+        amount = int(amount)
         with open("json/stats.json", "r") as file:
             data = json.load(file)
 
         if amount <= 0 or amount > data[user_id]['points']:
             p = data[user_id]['points']
-            await ctx.send(f"mate, you can only transfer up to {p} point{'s' if p > 1 else ''}. Brokie")
+            await ctx.send(f"mate, you can only transfer up to {p} point{'s' if p != 1 else ''}. Brokie")
             return
         
         add_holder(user_id)
@@ -128,24 +134,29 @@ class Stonks(commands.Cog):
             json.dump(stonks, file, indent=4)
 
         p = stonks[user_id]['points']
-        await ctx.send(f"successfully transfered {amount} point{'s' if amount > 1 else ''} "
-                       f"to crypto account. you're now holding {p} point{'s' if p > 1 else ''}.")
+        await ctx.send(f"successfully transfered {amount} point{'s' if amount != 1 else ''} "
+                       f"to crypto account. you're now holding {p} point{'s' if p != 1 else ''}.")
 
 
     @commands.command(name="cashout")
-    async def cashout(self, ctx: commands.Context, amount):
-        amount = int(amount)
+    async def cashout(self, ctx: commands.Context, amount: str = None):
         user_id = str(ctx.message.author.id)
         add_holder(user_id)
+
+        if amount is None:
+            await ctx.send("`!cashout <amount>`")
+            return
+
+        amount = float(amount)
         with open("json/stonks.json", "r") as file:
             stonks = json.load(file)
 
         if amount <= 0 or amount > stonks[user_id]['points']:
             p = stonks[user_id]['points']
-            await ctx.send(f"mate, you can only cash out up to {p} point{'s' if p > 1 else ''}. Brokie")
+            await ctx.send(f"mate, you can only cash out up to {p} point{'s' if p != 1 else ''}. Brokie")
             return
         
-        edit_stats.add_points(ctx, amount)
+        edit_stats.add_points(ctx, int(amount))
         stonks[user_id]['points'] -= amount
 
         with open("json/stonks.json", "w") as file:
@@ -155,10 +166,10 @@ class Stonks(commands.Cog):
             data = json.load(file)
 
         p = data[user_id]['points']
-        await ctx.send(f"successfully cashed out {amount} point{'s' if amount > 1 else ''} "
-                       f"to main account. you now have {p} point{'s' if p > 1 else ''}.")
+        await ctx.send(f"successfully cashed out {amount} point{'s' if amount != 1 else ''} "
+                       f"to main account. you now have {p} point{'s' if p != 1 else ''}.")
 
-    @commands.command(name="myholdings")
+    @commands.command(name="myholdings", aliases=["holdings"])
     async def holdings(self, ctx: commands.Context):
         user_id = str(ctx.message.author.id)
         add_holder(user_id)
@@ -194,17 +205,26 @@ class Stonks(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.command(name="createtoken")
-    async def create_token(self, ctx: commands.Context, name: str):
+    async def create_token(self, ctx: commands.Context, name: str = None):
         user_id = str(ctx.message.author.id)
         add_holder(user_id)
+        if name is None:
+            await ctx.send("`!createtoken <name>`")
+            return 
+
         token = Token(name, user_id, ctx.message.author.name, generate_id())
         await ctx.send(add_token(token, True))
 
     @commands.command(name="buy")
-    async def buy_token(self, ctx: commands.Context, ca: str, amount_in_pts: str):
+    async def buy_token(self, ctx: commands.Context, ca: str = None, amount_in_pts: str = None):
         user_id = str(ctx.message.author.id)
         add_holder(user_id)
-        amount_in_pts = int(amount_in_pts)
+
+        if ca is None or amount_in_pts is None:
+            await ctx.send("`!buy <contract address> <amount in points>`")
+            return
+
+        amount_in_pts = float(amount_in_pts)
         with open("json/stonks.json", "r") as file:
             data = json.load(file)
             
@@ -229,10 +249,15 @@ class Stonks(commands.Cog):
         await ctx.send(f"successfully bought {round(tokens_bought, 1)} tokens of {token.name}!")
 
     @commands.command(name="sell")
-    async def sell_token(self, ctx: commands.Context, ca: str, percent_of_holdings: str):
+    async def sell_token(self, ctx: commands.Context, ca: str = None, percent_of_holdings: str = None):
         user_id = str(ctx.message.author.id)
         add_holder(user_id)
-        percent_of_holdings = int(percent_of_holdings)
+
+        if ca is None or percent_of_holdings is None:
+            await ctx.send("`!sell <contract address> <percentage of your holdings [1-100]>`")
+            return
+
+        percent_of_holdings = float(percent_of_holdings)
         with open("json/stonks.json", "r") as file:
             data = json.load(file)
 
@@ -258,7 +283,7 @@ def add_token(tok: Token, checks=False) -> str:
 
     if checks and dev_data[tok.developer_id]['points'] < BASE_MARKET_CAP:
         return "oh you poor thing. you need 50 points in your crypto account, "\
-               "either transfer points via `!transfer` or find a job <3"
+               "either transfer points via `!transfer <amount>` or find a job <3"
 
 
     with open("json/tokens.json", "r") as file:
@@ -287,7 +312,7 @@ def add_token(tok: Token, checks=False) -> str:
     with open("json/tokens.json", "w") as file:
         json.dump(data, file, indent=4)
 
-    return f"successfully created \"{tok.name}\"! you can now buy it with `!buy \"{tok.token_id}\" <points to invest>`"
+    return f"successfully created \"{tok.name}\"! you can now buy it with `!buy {tok.token_id} <points to invest>`"
     
 
 def add_holder(id: str) -> None:
