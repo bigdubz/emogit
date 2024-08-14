@@ -264,35 +264,49 @@ async def check_outcome(ctx: commands.Context):
     user_id = str(ctx.message.author.id)
     with open("json/blackjack.json", "r") as file:
         game_data = json.load(file)
-        game_id = find_game_id(ctx)
 
-    stood = game_data[user_id][game_id]['stood']
-    bet_amount = game_data[user_id][game_id]['total bet']
-    p_hand = game_data[user_id][game_id]['player hand']['hand']
-    p_hand_val = game_data[user_id][game_id]['player hand']['value']
-    d_hand = game_data[user_id][game_id]['dealer hand']['hand']
-    d_hand_val = game_data[user_id][game_id]['dealer hand']['value']
+    game = game_data[user_id][find_game_id(ctx)]
+    stood = game['stood']
+    doubled = game['doubled']
+    bet_amount = game['total bet']
+    p_hand = game['player hand']['hand']
+    p_hand_val = game['player hand']['value']
+    d_hand = game['dealer hand']['hand']
+    d_hand_val = game['dealer hand']['value']
 
     if stood:
-        await ctx.send(f"dealer reveals his second card: {', '.join(d_hand)}\n"
-                       f"dealer hand value: {d_hand_val}")
+        if doubled:
+            await ctx.send(
+                f"<@{user_id}>\n"
+                f"your hand: {', '.join(p_hand)}\n"
+                f"your hand value: {p_hand_val}\n\n"
+                )
+            await asyncio.sleep(1)
+        await ctx.send(
+            f"dealer reveals his second card: {', '.join(d_hand)}\n"
+            f"dealer hand value: {d_hand_val}"
+            )
         await asyncio.sleep(1)
         while d_hand_val <= 16:
-            game_data[user_id][game_id]['dealer hand'] = \
-                deal(game_data[user_id]["deck"], game_data[user_id][game_id]['dealer hand']['hand'], 1)
-            d_hand = game_data[user_id][game_id]['dealer hand']['hand']
-            d_hand_val = game_data[user_id][game_id]['dealer hand']['value']
-            await ctx.send(f"dealer hits: {', '.join(d_hand)}\n"
-                           f"dealer hand value: {d_hand_val}")
+            game['dealer hand'] = \
+                deal(game_data[user_id]["deck"], game['dealer hand']['hand'], 1)
+            d_hand = game['dealer hand']['hand']
+            d_hand_val = game['dealer hand']['value']
+            await ctx.send(
+                f"dealer hits: {', '.join(d_hand)}\n"
+                f"dealer hand value: {d_hand_val}"
+                )
             await asyncio.sleep(1)
 
     if p_hand_val > 21:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       "bust!\n"
-                       f"you lost {bet_amount} points")
-        game_data[user_id][game_id]["concluded"] = True
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            "bust!\n"
+            f"you lost {bet_amount} points"
+            )
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
@@ -300,13 +314,15 @@ async def check_outcome(ctx: commands.Context):
         return
 
     if d_hand_val > 21:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       "dealer bust!\n"
-                       f"you gained {bet_amount} points")
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            "dealer bust!\n"
+            f"you gained {bet_amount} points"
+            )
         edit_stats.add_points(ctx, 2 * bet_amount)
-        game_data[user_id][game_id]["concluded"] = True
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
@@ -314,13 +330,15 @@ async def check_outcome(ctx: commands.Context):
         return
 
     if stood and d_hand_val == p_hand_val:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       "its a tie!\n"
-                       f"you got your {bet_amount} points back")
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            "its a tie!\n"
+            f"you got your {bet_amount} points back"
+            )
         edit_stats.add_points(ctx, bet_amount)
-        game_data[user_id][game_id]["concluded"] = True
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
@@ -328,13 +346,15 @@ async def check_outcome(ctx: commands.Context):
         return
 
     if p_hand_val == 21:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       f"{'natural blackjack' if check_natural(p_hand) else 'you win'}!\n"
-                       f"you gained {bet_amount} points")
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            f"{'natural blackjack' if check_natural(p_hand) else 'you win'}!\n"
+            f"you gained {bet_amount} points"
+            )
         edit_stats.add_points(ctx, 2 * bet_amount)
-        game_data[user_id][game_id]["concluded"] = True
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
@@ -342,12 +362,14 @@ async def check_outcome(ctx: commands.Context):
         return
 
     if stood and 21 >= d_hand_val > 16 and d_hand_val > p_hand_val:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       f"{'dealer natural blackjack' if check_natural(d_hand) else 'dealer wins'}!\n"
-                       f"you lost {bet_amount} points")
-        game_data[user_id][game_id]["concluded"] = True
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            f"{'dealer natural blackjack' if check_natural(d_hand) else 'dealer wins'}!\n"
+            f"you lost {bet_amount} points"
+            )
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
@@ -355,28 +377,29 @@ async def check_outcome(ctx: commands.Context):
         return
 
     if stood and d_hand_val < p_hand_val <= 21:
-        await ctx.send(f"<@{user_id}>\n"
-                       f"your hand: {', '.join(p_hand)}\n"
-                       f"your hand value: {p_hand_val}\n\n"
-                       f"you win!\n"
-                       f"you gained {bet_amount} points")
+        await ctx.send(
+            f"<@{user_id}>\n"
+            f"your hand: {', '.join(p_hand)}\n"
+            f"your hand value: {p_hand_val}\n\n"
+            f"you win!\n"
+            f"you gained {bet_amount} points"
+            )
         edit_stats.add_points(ctx, bet_amount * 2)
-        game_data[user_id][game_id]["concluded"] = True
+        game["concluded"] = True
         with open("json/blackjack.json", "w") as file:
             json.dump(game_data, file, indent=8)
 
         await reshuffle(ctx)
         return
 
-    if game_data[user_id][game_id]["doubled"]:
-        return
-
-    await ctx.send(f"<@{user_id}>\n"
-                   f"your hand: {', '.join(p_hand)}\n"
-                   f"your hand value: {p_hand_val}\n\n"
-                   f"dealer hand: {d_hand[0]}, ??\n"
-                   f"dealer hand value: {calculate_hand_value([d_hand[0]])}\n\n"
-                   f"!hit or !stand?")
+    await ctx.send(
+        f"<@{user_id}>\n"
+        f"your hand: {', '.join(p_hand)}\n"
+        f"your hand value: {p_hand_val}\n\n"
+        f"dealer hand: {d_hand[0]}, ??\n"
+        f"dealer hand value: {calculate_hand_value([d_hand[0]])}\n\n"
+        f"!hit or !stand?"
+        )
 
 
 def generate_game_id():
