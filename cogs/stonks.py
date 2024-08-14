@@ -19,6 +19,7 @@ class Token:
                  dev_name: str,
                  contract_id: str,
                  holders: dict = {},
+                 transaction_history: dict = {},
                  total_supply: int = INITIAL_SUPPLY,
                  market_capital: float = BASE_MARKET_CAP,
                  buyable_supply: float = INITIAL_SUPPLY,
@@ -28,6 +29,7 @@ class Token:
         self.developer_name = dev_name
         self.token_id: str = contract_id
         self.holders = holders
+        self.transaction_history = transaction_history
         self.total_supply: int = total_supply  # total tokens
         self.market_cap: float = market_capital  # costs this many points to create a token
         self.buyable_supply = buyable_supply  # supply remaining
@@ -41,6 +43,7 @@ class Token:
 
         tokens_bought: float = num_points / self.price
         self.buyable_supply -= tokens_bought 
+        mcap_before = self.market_cap
         self.update_market_cap(num_points)
         holder = makerid in self.holders
 
@@ -54,6 +57,14 @@ class Token:
 
         with open("json/stonks.json", "w") as file:
             json.dump(data, file, indent=4)
+
+        self.transaction_history[generate_transaction_id()] = {
+            "maker": makerid,
+            "type": "buy",
+            "at market cap": mcap_before,
+            "points": num_points,
+            "supply": tokens_bought
+        }
 
         if not holder:
             self.holders[makerid] = 0
@@ -74,7 +85,7 @@ class Token:
         self.buyable_supply += num_tokens
 
         points_sold = (percent_of_holdings/100)*self.holders[makerid]
-
+        mcap_before = self.market_cap
         self.update_market_cap(-self.holders[makerid])  # remove invested capital by user
         price_sold = num_tokens * self.price  # calculate price after removing user capital invested
         self.update_market_cap(self.holders[makerid] - points_sold)  # re-add the capital invested and remove the points sold
@@ -90,6 +101,14 @@ class Token:
 
         with open("json/stonks.json", "w") as file:
             json.dump(data, file, indent=4)
+
+        self.transaction_history[generate_transaction_id()] = {
+            "maker": makerid,
+            "type": "sell",
+            "at market cap": mcap_before,
+            "points": price_sold,
+            "supply": num_tokens 
+        }
 
         add_token(self)
         return price_sold
@@ -111,7 +130,7 @@ class Stonks(commands.Cog):
         add_holder(user_id)
 
         if amount is None:
-            await ctx.send("`!cashout <amount>`")
+            await ctx.send("`!transfer <amount>`")
             return
 
         amount = int(amount)
@@ -212,7 +231,7 @@ class Stonks(commands.Cog):
             await ctx.send("`!createtoken <name>`")
             return 
 
-        token = Token(name, user_id, ctx.message.author.name, generate_id())
+        token = Token(name, user_id, ctx.message.author.name, generate_token_id())
         await ctx.send(add_token(token, True))
 
     @commands.command(name="buy")
@@ -230,7 +249,7 @@ class Stonks(commands.Cog):
             
         p = data[user_id]['points']
         if amount_in_pts > p:
-            await ctx.send(f"you're not rich enough pookie <3 (you have {p} point{'s' if p > 1 else ''})")
+            await ctx.send(f"you're not rich enough pookie <3 (you have {p} point{'s' if p != 1 else ''})")
             return
 
         if amount_in_pts <= 0:
@@ -300,7 +319,8 @@ def add_token(tok: Token, checks=False) -> str:
         "remaining supply": tok.buyable_supply,
         "market capital": tok.market_cap,
         "price": tok.price,
-        "holders": tok.holders
+        "holders": tok.holders,
+        "transactions": tok.transaction_history
     }
 
     if checks: 
@@ -312,7 +332,7 @@ def add_token(tok: Token, checks=False) -> str:
     with open("json/tokens.json", "w") as file:
         json.dump(data, file, indent=4)
 
-    return f"successfully created \"{tok.name}\"! you can now buy it with `!buy {tok.token_id} <points to invest>`"
+    return f"successfully created {tok.name}! you can now buy it with `!buy {tok.token_id} <points to invest>`"
     
 
 def add_holder(id: str) -> None:
@@ -332,20 +352,36 @@ def add_holder(id: str) -> None:
     return
 
 
-def generate_id() -> str:
+def generate_token_id() -> str:
     chars = "abcdefghijklmnopqrstuvwxyz1234567890"
     token_id = ""
     while len(token_id) < 10:
         token_id += random.choice(chars)
 
-    with open("json/stonks.json", "r") as file:
+    with open("json/tokens.json", "r") as file:
         data = json.load(file)
 
-    for user in data:
-        if token_id in user:
-            return generate_id()
+    for tok_id in data:
+        if token_id in tok_id:
+            return generate_token_id()
 
     return token_id
+
+
+def generate_transaction_id() -> str:
+    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+    t_id = ""
+    while len(t_id) < 25:
+        t_id += random.choice(chars)
+
+    with open("json/tokens.json", "r") as file:
+        data = json.load(file)
+
+    for token in data.values():
+        if t_id in token['transactions']:
+            return generate_token_id()
+
+    return t_id
 
 
 def construct_token(ca: str, tok_data: dict) -> Token:
@@ -356,6 +392,7 @@ def construct_token(ca: str, tok_data: dict) -> Token:
         tok_data['dev'][:ind],
         ca,
         tok_data['holders'],
+        tok_data['transactions'],
         tok_data['total supply'],
         tok_data['market capital'],
         tok_data['remaining supply']

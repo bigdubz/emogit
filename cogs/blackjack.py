@@ -189,7 +189,7 @@ class Blackjack(commands.Cog):
             game_data = json.load(file)
 
         if not game_data[user_id][game_id]["concluded"]:
-            await stand(ctx)
+            await self.stand(ctx)
 
 
 async def create_game(ctx, amount: int):

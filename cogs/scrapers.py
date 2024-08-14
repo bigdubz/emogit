@@ -12,32 +12,34 @@ class Scrapers(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @commands.command(name='rdt', description='Sends a random post from the subreddit **owner only for now**')
-    async def reddit(self, ctx: commands.Context, subreddit: str, limit: int = None):
-        # if not await self.bot.is_owner(ctx.message.author):
-        #     await ctx.send("unauthorized")
-        #     return
 
-        cost = 10
-        user_id = str(ctx.message.author.id)
+    # disabled
+    # @commands.command(name='rdt', description='Sends a random post from the subreddit **owner only for now**')
+    # async def reddit(self, ctx: commands.Context, subreddit: str, limit: int = None):
+    #     # if not await self.bot.is_owner(ctx.message.author):
+    #         # await ctx.send("unauthorized")
+    #         # return
 
-        with open("json/stats.json", "r") as file:
-            raw_json = json.loads(' '.join(file.readlines()))
+    #     cost = 10
+    #     user_id = str(ctx.message.author.id)
 
-        if raw_json[user_id]["points"] < cost:
-            await ctx.send(f"fucking poor, need {cost} points", delete_after=5)
-            return
+    #     with open("json/stats.json", "r") as file:
+    #         raw_json = json.loads(' '.join(file.readlines()))
 
-        url = f"https://www.reddit.com/r/{subreddit}/.json?limit={limit}"
-        response = requests.get(url, headers={"User-Agent": subreddit})
-        raw_json = json.loads(str(response.text))
-        all_posts = []
-        for post in raw_json["data"]["children"]:
-            all_posts.append(f"{post['data']['title']} {post['data']['url']}")
+    #     if raw_json[user_id]["points"] < cost:
+    #         await ctx.send(f"fucking poor, need {cost} points", delete_after=5)
+    #         return
 
-        all_posts.pop(0)
-        eus.add_points(ctx, -cost, override_id=user_id)
-        await ctx.send(choice(all_posts))
+    #     url = f"https://www.reddit.com/r/{subreddit}/.json?limit={limit}"
+    #     response = requests.get(url, headers={"User-Agent": subreddit})
+    #     raw_json = json.loads(str(response.text))
+    #     all_posts = []
+    #     for post in raw_json["data"]["children"]:
+    #         all_posts.append(f"{post['data']['title']} {post['data']['url']}")
+
+    #     all_posts.pop(0)
+    #     eus.add_points(ctx, -cost, override_id=user_id)
+    #     await ctx.send(choice(all_posts))
 
 
 def get_soup(search_url: str, syntax: str, tags: str, search: str = None, original_url: str = None):

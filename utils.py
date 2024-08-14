@@ -2,10 +2,12 @@ import os
 from discord.ext import commands
 
 
+file_types = [".webm", "webm.part", ".part", ".mp4.part", ".m4a"]
+
 def delete_music(dictionary: dict):
     for file in os.listdir(path='.'):
-        split_tup = os.path.splitext(str(file))
-        if split_tup[1] == ".webm" or split_tup == ".webm.part" or split_tup == ".part" or split_tup == ".mp4.part":
+        file_type = os.path.splitext(str(file))[1]
+        if file_type in file_types:
             os.remove(file)
 
     dictionary.clear()
