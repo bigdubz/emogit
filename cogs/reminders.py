@@ -12,7 +12,7 @@ from discord.ext import commands
 weekdays = {"monday": 0, "tuesday": 1, "wednesday": 2, "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6}
 
 
-def get_trigger_reminder(prayer_time_obj, weather_time) -> bool:
+def get_trigger_reminder(prayer_time_obj, prayer_time_5_obj, weather_time) -> bool:
     current_day = datetime.datetime.now().weekday()
     current_time = datetime.datetime.now().time().strftime("%H:%M %p")
 
@@ -25,8 +25,9 @@ def get_trigger_reminder(prayer_time_obj, weather_time) -> bool:
                     user_data[user]["reminders"][reminder]["times"]):
                 return True
 
-    return (datetime.datetime.now().time().strftime("%H:%M") == prayer_time_obj.strftime("%H:%M") or
-            datetime.datetime.now().time().strftime("%H:%M %p") == weather_time)
+    return (datetime.datetime.now().time().strftime("%H:%M") in 
+            [prayer_time_obj.strftime("%H:%M"), prayer_time_5_obj.strftime("%H:%M")]
+            or datetime.datetime.now().time().strftime("%H:%M %p") == weather_time)
 
 
 class Reminders(commands.Cog):
@@ -74,35 +75,49 @@ class Reminders(commands.Cog):
         prayer, prayer_time = scrapers.get_athan_time()
         prayer_time_obj = datetime.datetime.strptime(prayer_time, "%I:%M %p").time()
 
-        # Main reminder check
-        while True:
-            if get_trigger_reminder(prayer_time_obj, weather_time):
-                break
+        # build the time object 5 mins before
+        m = prayer_time_obj.minute - 5
+        mins = m if m >= 0 else 60 + m
+        h = prayer_time_obj.hour if m >= 0 else prayer_time_obj.hour - 1
+        hrs = h if h >= 0 else 23
+        prayer_time_5_obj = datetime.time(hrs, mins) # ¡Ahí está!
+
+        # Main check
+        while not get_trigger_reminder(prayer_time_obj, prayer_time_5_obj, weather_time):
             await asyncio.sleep(30)
 
         with open("json/stats.json", "r") as file:
             user_data = json.load(file)
 
-        if datetime.datetime.now().time().strftime("%H:%M") == prayer_time_obj.strftime("%H:%M"):
+        time_now = datetime.datetime.now().time()
+        if time_now.strftime("%H:%M") == prayer_time_5_obj.strftime("%H:%M"):
             for user in user_data:
                 if user_data[user]["athan reminder"]:
                     gigachad = await self.bot.fetch_user(user)
                     try:
-                        await gigachad.send(
-                            f"gigachad, {prayer} athan now at {prayer_time}"
-                        )
+                        await gigachad.send(f"gigachad, {prayer} athan is in 5 minutes!")
+
+                    except Forbidden:
+                        print(f"couldn't send message to {gigachad.name}!")
+
+        if time_now.strftime("%H:%M") == prayer_time_obj.strftime("%H:%M"):
+            for user in user_data:
+                if user_data[user]["athan reminder"]:
+                    gigachad = await self.bot.fetch_user(user)
+                    try:
+                        await gigachad.send(f"gigachad, {prayer} athan now at {prayer_time}")
 
                     except Forbidden:
                         print(f"couldn't send message to {gigachad.name}!")
 
 
-        if datetime.datetime.now().time().strftime("%H:%M %p") == weather_time:
+        if time_now.strftime("%H:%M %p") == weather_time:
             for user in user_data:
                 if user_data[user]["weather updates"]:
                     gigachad = await self.bot.fetch_user(user)
                     await gigachad.send(
-                        f"{'gigachad' if user != '697855051779014796' else 'gigashort'},"
-                        f" here's today's weather forecast:\n\n{scrapers.weather_stats_today()}")
+                        f"gigachad, here's today's weather forecast:\n\n{scrapers.weather_stats_today()}"
+                        )
 
         await self.send_reminder_messages()
         await asyncio.sleep(180)
