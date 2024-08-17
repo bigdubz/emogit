@@ -197,7 +197,7 @@ class Chatbot(commands.Cog):
             all_words = json.load(file)
 
         all_words[guild_id]["chatter"] = not all_words[guild_id]["chatter"]
-        msg = "auto chatter toggled on" if all_words[guild_id]["chatter"] else "auto chatter toggled off"
+        msg = f"auto chatter toggled {'on' if all_words[guild_id]["chatter"] else 'off'}"
         await action.response.send_message(msg)
         with open("json/words.json", "w") as file:
             json.dump(all_words, file, indent=4, sort_keys=True)

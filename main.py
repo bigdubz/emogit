@@ -4,6 +4,7 @@ import random
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
+from deep_translator import GoogleTranslator
 
 import json
 import utils
@@ -12,6 +13,7 @@ from cogs import chatbot, edit_stats as eus
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
+LANG_DET = os.getenv('LANG_DET')
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -40,6 +42,18 @@ async def on_message(message):
 
     if message.author.bot:
         return
+    
+    if str(message.author.id) == auth:
+        ctx = await bot.get_context(message)
+        translated = GoogleTranslator(source='es', target='en').translate(message.content)
+        if translated != None and translated.lower() != message.content.lower():
+            await ctx.send(translated)
+    
+    if str(message.author.id) == "488359917124583424":
+        ctx = await bot.get_context(message)
+        translated = GoogleTranslator(source='de', target='en').translate(message.content)
+        if translated != None and translated.lower() != message.content.lower():
+            await ctx.send(translated)
 
     await chatbot.record_words(message)
     await eus.count_message(message)
