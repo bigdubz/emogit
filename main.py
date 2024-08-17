@@ -45,10 +45,10 @@ async def on_message(message):
     
     if str(message.author.id) == auth or str(message.author.id) == "488359917124583424" and not message.content.startswith("!"):
         language = "es" if str(message.author.id) == auth else "de"
+        a = message.content.replace('’', "\'")
         ctx = await bot.get_context(message)
-        msg = ''.join([a for a in message.content if a.upper() in " ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖẞÍÁÉÚÓ"])
-        translated = GoogleTranslator(source=language, target='en').translate(msg)
-        if translated != None and translated.lower() != msg.lower():
+        translated = GoogleTranslator(source=language, target='en').translate(a)
+        if translated != None and translated.lower() != a.lower():
             await ctx.send(translated)
 
     await chatbot.record_words(message)
