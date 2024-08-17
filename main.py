@@ -43,7 +43,7 @@ async def on_message(message):
     if message.author.bot:
         return
     
-    if str(message.author.id) == auth or str(message.author.id) == "488359917124583424" and not message.content.startswith("!"):
+    if (str(message.author.id) == auth or str(message.author.id) == "488359917124583424") and not message.content.startswith("!"):
         language = "es" if str(message.author.id) == auth else "de"
         a = message.content.replace('’', "\'")
         ctx = await bot.get_context(message)
