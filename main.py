@@ -43,16 +43,12 @@ async def on_message(message):
     if message.author.bot:
         return
     
-    if str(message.author.id) == auth:
+    if str(message.author.id) == auth or str(message.author.id) == "488359917124583424" and not message.content.startswith("!"):
+        language = "es" if str(message.author.id) == auth else "de"
         ctx = await bot.get_context(message)
-        translated = GoogleTranslator(source='es', target='en').translate(message.content)
-        if translated != None and translated.lower() != message.content.lower():
-            await ctx.send(translated)
-    
-    if str(message.author.id) == "488359917124583424":
-        ctx = await bot.get_context(message)
-        translated = GoogleTranslator(source='de', target='en').translate(message.content)
-        if translated != None and translated.lower() != message.content.lower():
+        msg = ''.join([a for a in message.content if a.upper() in " ABCDEFGHIJKLMNOPQRSTUVWXYZÄÜÖẞÍÁÉÚÓ"])
+        translated = GoogleTranslator(source=language, target='en').translate(msg)
+        if translated != None and translated.lower() != msg.lower():
             await ctx.send(translated)
 
     await chatbot.record_words(message)
