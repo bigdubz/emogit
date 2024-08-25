@@ -14,6 +14,8 @@ load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 LANG_DET = os.getenv('LANG_DET')
+SERV_ID = int(os.getenv('PRIV_SERV'))
+ID1 = int(os.getenv('ID1'))
 intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -37,18 +39,16 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    if str(message.author.id) == "1136467634355966015":
-        return
-
     if message.author.bot:
         return
-    
-    if (str(message.author.id) == auth or str(message.author.id) == "488359917124583424") and not message.content.startswith("!"):
+
+    if ((str(message.author.id) == auth or message.author.id == ID1)
+            and not message.content.startswith("!") and message.guild.id == SERV_ID):
         language = "es" if str(message.author.id) == auth else "de"
         a = message.content.replace('’', "\'")
         ctx = await bot.get_context(message)
         translated = GoogleTranslator(source=language, target='en').translate(a)
-        if translated != None and translated.lower() != a.lower():
+        if translated is not None and translated.lower() != a.lower():
             await ctx.send(translated)
 
     await chatbot.record_words(message)
@@ -72,7 +72,7 @@ async def clear(action: discord.Interaction, amount: int):
 @bot.command(name='sync', description='Syncs all commands globally **owner only**')
 async def sync(ctx: discord.ext.commands.Context):
     if not await bot.is_owner(ctx.message.author):
-        await action.response.send_message("unauthorized")
+        await ctx.send("unauthorized")
         return
 
     synced = await bot.tree.sync()
