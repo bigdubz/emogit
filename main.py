@@ -10,17 +10,17 @@ import json
 import utils
 from cogs import chatbot, edit_stats as eus
 
-load_dotenv()
 
+load_dotenv()
+auth = os.getenv('AUTH')
 TOKEN = os.getenv('TOKEN')
 LANG_DET = os.getenv('LANG_DET')
 SERV_ID = int(os.getenv('PRIV_SERV'))
 ID1 = int(os.getenv('ID1'))
-intents = discord.Intents.all()
 
+intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-auth = "451301920364167179"
 song_data = {}
 
 
