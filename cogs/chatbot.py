@@ -188,8 +188,11 @@ class Chatbot(commands.Cog):
         description='Enables auto chatter mode, occasionally sends messages to the server **owner only**'
     )
     async def enable(self, action: discord.Interaction):
+        await action.response.send_message("disabled for now")
+        return
+
         if not await self.bot.is_owner(action.user):
-            await ctx.send("unauthorized")
+            await action.response.send_message("unauthorized")
             return
 
         guild_id = str(action.guild.id)

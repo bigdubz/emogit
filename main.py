@@ -51,10 +51,12 @@ async def on_message(message):
         if translated is not None and translated.lower() != a.lower():
             await ctx.send(translated)
 
-    await chatbot.record_words(message)
     await eus.count_message(message)
     await bot.process_commands(message)
-    await chatter(message)
+
+    # disabled for now
+    # await chatbot.record_words(message)
+    # await chatter(message)
 
 
 @bot.tree.command(name='clear', description='Deletes messages **owner only**')
