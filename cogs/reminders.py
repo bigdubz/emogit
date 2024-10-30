@@ -110,15 +110,6 @@ class Reminders(commands.Cog):
                     except Forbidden:
                         print(f"couldn't send message to {gigachad.name}!")
 
-
-        if time_now.strftime("%H:%M %p") == weather_time:
-            for user in user_data:
-                if user_data[user]["weather updates"]:
-                    gigachad = await self.bot.fetch_user(user)
-                    await gigachad.send(
-                        f"gigachad, here's today's weather forecast:\n\n{scrapers.weather_stats_today()}"
-                        )
-
         await self.send_reminder_messages()
         await asyncio.sleep(180)
         await self.start_reminders()

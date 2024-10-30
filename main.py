@@ -51,10 +51,10 @@ async def on_message(message):
         if translated is not None and translated.lower() != a.lower():
             await ctx.send(translated)
 
-    await eus.count_message(message)
     await bot.process_commands(message)
 
     # disabled for now
+    # await eus.count_message(message)
     # await chatbot.record_words(message)
     # await chatter(message)
 

@@ -14,32 +14,32 @@ class Scrapers(commands.Cog):
 
 
     # disabled
-    # @commands.command(name='rdt', description='Sends a random post from the subreddit **owner only for now**')
-    # async def reddit(self, ctx: commands.Context, subreddit: str, limit: int = None):
-    #     # if not await self.bot.is_owner(ctx.message.author):
-    #         # await ctx.send("unauthorized")
-    #         # return
+    @commands.command(name='rdt', description='Sends a random post from the subreddit **owner only for now**')
+    async def reddit(self, ctx: commands.Context, subreddit: str, limit: int = None):
+        # if not await self.bot.is_owner(ctx.message.author):
+            # await ctx.send("unauthorized")
+            # return
 
-    #     cost = 10
-    #     user_id = str(ctx.message.author.id)
+        cost = 10
+        user_id = str(ctx.message.author.id)
 
-    #     with open("json/stats.json", "r") as file:
-    #         raw_json = json.loads(' '.join(file.readlines()))
+        with open("json/stats.json", "r") as file:
+            raw_json = json.loads(' '.join(file.readlines()))
 
-    #     if raw_json[user_id]["points"] < cost:
-    #         await ctx.send(f"fucking poor, need {cost} points", delete_after=5)
-    #         return
+        if raw_json[user_id]["points"] < cost:
+            await ctx.send(f"fucking poor, need {cost} points", delete_after=5)
+            return
 
-    #     url = f"https://www.reddit.com/r/{subreddit}/.json?limit={limit}"
-    #     response = requests.get(url, headers={"User-Agent": subreddit})
-    #     raw_json = json.loads(str(response.text))
-    #     all_posts = []
-    #     for post in raw_json["data"]["children"]:
-    #         all_posts.append(f"{post['data']['title']} {post['data']['url']}")
+        url = f"https://www.reddit.com/r/{subreddit}/.json?limit={limit}"
+        response = requests.get(url, headers={"User-Agent": subreddit})
+        raw_json = json.loads(str(response.text))
+        all_posts = []
+        for post in raw_json["data"]["children"]:
+            all_posts.append(f"{post['data']['title']} {post['data']['url']}")
 
-    #     all_posts.pop(0)
-    #     eus.add_points(ctx, -cost, override_id=user_id)
-    #     await ctx.send(choice(all_posts))
+        all_posts.pop(0)
+        eus.add_points(ctx, -cost, override_id=user_id)
+        await ctx.send(choice(all_posts))
 
 
 def get_soup(search_url: str, syntax: str, tags: str, search: str = None, original_url: str = None):
@@ -91,7 +91,7 @@ def get_athan_time():
 
         elif i % 2 != 0 and i != 3:
             t = datetime.datetime.strptime(td[i].text.strip(), "%I:%M %p").time()
-            t_obj = datetime.time(t.hour if t.hour < 24 else 0, t.minute)
+            t_obj = datetime.time(t.hour + 1 if t.hour + 1 < 24 else 0, t.minute)
             time = datetime.time.strftime(t_obj, "%I:%M %p")
             times.append(time)
 
