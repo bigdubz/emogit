@@ -5,3 +5,5 @@
 *.env
 /json
 /emovenv
+client_secrets.json
+oauth_token.json

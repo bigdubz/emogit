@@ -61,6 +61,9 @@ def add_points(ctx: commands.Context, amount: int, override_id=None, name=None):
     with open("json/stats.json", "r") as file:
         user_data = json.load(file)
 
+    if user_data[user_id]['points'] == "inf":
+        return;
+
     edit_stats(ctx, user_id, _name=name, _pts=(user_data[user_id]['points'] + amount))
 
 
@@ -98,7 +101,7 @@ class UserStats(commands.Cog):
         with open("json/stats.json", "r") as file:
             user_data = json.load(file)
 
-        if user_data[giver_id]['points'] < amount:
+        if user_data[giver_id]['points'] != 'inf' and user_data[giver_id]['points'] < amount:
             await ctx.send(
                 f"<@{ctx.message.author.id}> you do not have enough points, poor", delete_after=5
             )
@@ -136,27 +139,34 @@ class UserStats(commands.Cog):
         if amount == "all":
             amount = user_data[user_id]['points']
 
-        amount = int(amount)
-        if amount < 1:
-            await ctx.send("stupid ass", delete_after=5)
-            return
+        if user_data[user_id]['points'] != 'inf':
+            amount = int(amount)
 
-        if amount > user_data[user_id]["points"]:
-            await ctx.send("you dont have enough points you broke bitch", delete_after=5)
-            return
+            if amount < 1:
+                await ctx.send("stupid ass", delete_after=5)
+                return
+
+            if amount > user_data[user_id]["points"]:
+                await ctx.send("you dont have enough points you broke bitch", delete_after=5)
+                return
+
+        p = user_data[user_id]['points']
+        w = f"{p + amount}" if p != 'inf' else 'infinite'
+        l = f"{p - amount}" if p != 'inf' else 'infinite'
 
         if randint(0, 1) == 1:
             add_points(ctx, amount)
             await ctx.send(
                 f"<@{user_id}> you got lucky for once and you gained {amount} points."
-                f" you now have {user_data[user_id]['points'] + amount} points"
+                f" you now have {w} points"
             )
 
         else:
-            add_points(ctx, -amount)
+            if amount != 'inf':
+                add_points(ctx, -amount)
             await ctx.send(
                 f"<@{user_id}> you really thought gamblers win LMAO. you lost {amount} points. you now have "
-                f"{user_data[user_id]['points'] - amount} points"
+                f"{l} points"
             )
 
     @app_commands.command(name='claim', description='Claims your daily points bonus')
@@ -190,7 +200,10 @@ class UserStats(commands.Cog):
         with open("json/stats.json", "r") as file:
             user_data = json.load(file)
 
-        await action.response.send_message(f"<@{user_id}> you have {user_data[user_id]['points']} points")
+
+        m = user_data[user_id]['points']
+        am = m if m != 'inf' else 'infinite'
+        await action.response.send_message(f"<@{user_id}> you have {am} points")
 
     @commands.command(name='reset', description='Reset all stats **owner only**')
     async def reset(self, ctx: commands.Context):
@@ -223,7 +236,7 @@ class UserStats(commands.Cog):
         with open("json/stats.json", "r") as file:
             user_data = json.load(file)
 
-        if user_data[user_id]['points'] >= head_cost:
+        if user_data[user_id]['points'] == 'inf' or user_data[user_id]['points'] >= head_cost:
             await ctx.send(f"<@{user_id}> slurp slurp\nDo you like that?")
             add_points(ctx, -head_cost)
 

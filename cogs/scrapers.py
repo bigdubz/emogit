@@ -26,7 +26,7 @@ class Scrapers(commands.Cog):
         with open("json/stats.json", "r") as file:
             raw_json = json.loads(' '.join(file.readlines()))
 
-        if raw_json[user_id]["points"] < cost:
+        if raw_json[user_id]["points"] != 'inf' and raw_json[user_id]["points"] < cost:
             await ctx.send(f"fucking poor, need {cost} points", delete_after=5)
             return
 
@@ -91,9 +91,33 @@ def get_athan_time():
 
         elif i % 2 != 0 and i != 3:
             t = datetime.datetime.strptime(td[i].text.strip(), "%I:%M %p").time()
-            t_obj = datetime.time(t.hour + 1 if t.hour + 1 < 24 else 0, t.minute)
+            t_obj = datetime.time(t.hour if t.hour < 24 else 0, t.minute)
             time = datetime.time.strftime(t_obj, "%I:%M %p")
             times.append(time)
+
+    prayer_times = {key: val for key, val in zip(prayers, times)}
+    for prayer, time in prayer_times.items():
+        next_prayer_time = datetime.datetime.strptime(time, "%I:%M %p").time()
+        if datetime.datetime.now().time() < next_prayer_time:
+            return prayer, time
+
+    return list(prayer_times.items())[0]
+
+
+def get_updated_athan_time():
+    url = "https://www.arabiaweather.com/en/prayers-time/amman/1797/jo"
+    response = requests.get(url)
+    soup = bs(response.text, "html.parser")
+    prayers = [x.text for x in soup.find_all("p", class_="salah-name")][0:6]
+    times = [x.text for x in soup.find_all("p", class_="salah-time")][0:6]
+    prayers.pop(1)
+    times.pop(1)
+    
+    times[0] += " AM"
+    times[1] += " PM" if int(times[1][0:2]) == 12 else " AM"
+    times[2] += " PM"
+    times[3] += " PM"
+    times[4] += " PM"
 
     prayer_times = {key: val for key, val in zip(prayers, times)}
     for prayer, time in prayer_times.items():

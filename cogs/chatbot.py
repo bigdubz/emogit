@@ -101,8 +101,8 @@ class Chatbot(commands.Cog):
     @commands.hybrid_command(name='talk',
                              description='Generate random messages from the current server based on sentence length')
     async def talk(self, ctx: commands.Context, sentence: str):
-        await ctx.send("disabled for now")
-        return
+        # await ctx.send("disabled for now")
+        # return
 
         guild_id = str(ctx.message.guild.id)
         user_id = str(ctx.message.author.id)

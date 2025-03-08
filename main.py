@@ -9,6 +9,7 @@ from deep_translator import GoogleTranslator
 import json
 import utils
 from cogs import chatbot, edit_stats as eus
+from cogs import scrapers as SC
 
 
 load_dotenv()
@@ -17,6 +18,7 @@ TOKEN = os.getenv('TOKEN')
 LANG_DET = os.getenv('LANG_DET')
 SERV_ID = int(os.getenv('PRIV_SERV'))
 ID1 = int(os.getenv('ID1'))
+ID2 = int(os.getenv('ID2'))
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -35,6 +37,7 @@ async def on_ready():
 
     # This should always be executed last (because of infinite while loop)
     await bot.get_cog('Reminders').start_reminders()
+            
 
 
 @bot.event
@@ -42,21 +45,22 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    if ((str(message.author.id) == auth or message.author.id == ID1)
-            and not message.content.startswith("!") and message.guild.id == SERV_ID):
-        language = "es" if str(message.author.id) == auth else "de"
-        a = message.content.replace('’', "\'")
-        ctx = await bot.get_context(message)
-        translated = GoogleTranslator(source=language, target='en').translate(a)
-        if translated is not None and translated.lower() != a.lower():
-            await ctx.send(translated)
+    # TODO: fix
+    # if ((str(message.author.id) == auth or message.author.id == ID2)
+    #         and not message.content.startswith("!") and message.guild.id == SERV_ID):
+    #     language = "es" if str(message.author.id) == auth else "de"
+    #     a = message.content.replace('’', "\'")
+    #     ctx = await bot.get_context(message)
+    #     translated = GoogleTranslator(source=language, target='en').translate(a)
+    #     if translated is not None and translated.lower() != a.lower():
+    #         await ctx.send(translated)
 
     await bot.process_commands(message)
 
     # disabled for now
-    # await eus.count_message(message)
-    # await chatbot.record_words(message)
-    # await chatter(message)
+    await eus.count_message(message)
+    await chatbot.record_words(message)
+    await chatter(message)
 
 
 @bot.tree.command(name='clear', description='Deletes messages **owner only**')
@@ -142,6 +146,21 @@ async def chatter(msg: discord.Message):
     if random.randint(0, 12) == 0:
         chat_bot: Chatbot = bot.get_cog('Chatbot')
         await chat_bot.talk(ctx, msg.content)
+
+
+async def send_msg_to_athan_boys(msg: str):
+    with open("json/stats.json") as file:
+        user_data = json.load(file)
+    
+    for _id in user_data:
+        if user_data[_id]["athan reminder"]:
+            gigachad = await bot.fetch_user(_id)
+            await gigachad.send(msg)
+
+
+async def send_me_a_msg(msg: str):
+    me = await bot.fetch_user(auth)
+    await me.send(msg)
 
 
 if __name__ == "__main__":

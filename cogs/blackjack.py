@@ -45,7 +45,7 @@ class Blackjack(commands.Cog):
             await ctx.send("retarded much?", delete_after=5)
             return
 
-        if bet_amount > user_points:
+        if user_points != "inf" and bet_amount > user_points:
             await ctx.send("you dont have enough points. brokie", delete_after=5)
             return
 

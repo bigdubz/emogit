@@ -72,7 +72,7 @@ class Reminders(commands.Cog):
 
     async def start_reminders(self):
         weather_time = "07:00 AM"
-        prayer, prayer_time = scrapers.get_athan_time()
+        prayer, prayer_time = scrapers.get_updated_athan_time()
         prayer_time_obj = datetime.datetime.strptime(prayer_time, "%I:%M %p").time()
 
         # build the time object 5 mins before
@@ -80,7 +80,7 @@ class Reminders(commands.Cog):
         mins = m if m >= 0 else 60 + m
         h = prayer_time_obj.hour if m >= 0 else prayer_time_obj.hour - 1
         hrs = h if h >= 0 else 23
-        prayer_time_5_obj = datetime.time(hrs, mins) # ¡Ahí está!
+        prayer_time_5_obj = datetime.time(hrs, mins)
 
         # Main check
         while not get_trigger_reminder(prayer_time_obj, prayer_time_5_obj, weather_time):

@@ -84,6 +84,7 @@ class MusicBot(commands.Cog):
 
         voice_client = ctx.guild.voice_client
         url = scrapers.yt(search)
+        
         if url not in song_data:
             await ctx.send("downloaded")
             filename, length = await YTDLSource.from_url(url, loop=self.bot.loop)
@@ -102,7 +103,7 @@ class MusicBot(commands.Cog):
 
             return
 
-        await ctx.send("now playing \"%s\"" % ' '.join(song_data[url][0][:-19].split('_')))
+        await ctx.send("now playing \"%s\"" % ' '.join(song_data[url][0][:-18].split('_')))
         ctx.guild.voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=song_data[url][0]))
         if explicit_call:
             stats.add_points(ctx, song_data[url][1])
