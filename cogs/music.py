@@ -104,7 +104,7 @@ class MusicBot(commands.Cog):
             return
 
         await ctx.send("now playing \"%s\"" % ' '.join(song_data[url][0][:-18].split('_')))
-        ctx.guild.voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg.exe", source=song_data[url][0]))
+        ctx.guild.voice_client.play(discord.FFmpegPCMAudio(executable="ffmpeg", source=song_data[url][0]))
         if explicit_call:
             stats.add_points(ctx, song_data[url][1])
 
